@@ -11,19 +11,19 @@ GET     /pcms/v1/growthmonitoring/report/:awCode                    controllers.
 GET     /pcms/v1/growthmonitoring/dashboard/:stateCode              controllers.GrowthMonitoringController.dashboard(stateCode)
 
 POST    /pcms/v1/attendance-entry                                   controllers.AttendanceController.addLogRecord
-GET     /pcms/v1/attendance/report/:awCode                          controllers.AttendanceController.report(awCode)
-GET     /pcms/v1/attendance/dashboard/:stateCode                    controllers.AttendanceController.dashboard(stateCode)
+GET     /pcms/v1/attendance/report/:awCode/:date                          controllers.AttendanceController.report(awCode, date)
+GET     /pcms/v1/attendance/dashboard/:stateCode/:date                    controllers.AttendanceController.dashboard(stateCode, date)
 
 POST    /pcms/v1/hotcooked-entry                                    controllers.HotCookedController.addLogRecord
-GET     /pcms/v1/hotcooked/report/:awCode                           controllers.HotCookedController.report(awCode)
-GET     /pcms/v1/hotcooked/dashboard/:stateCode                     controllers.HotCookedController.dashboard(stateCode)
+GET     /pcms/v1/hotcooked/report/:awCode/:date                           controllers.HotCookedController.report(awCode, date)
+GET     /pcms/v1/hotcooked/dashboard/:stateCode/:date                     controllers.HotCookedController.dashboard(stateCode, date)
 
 POST    /pcms/v1/takehomeration-entry                               controllers.TakeHomeRationController.addLogRecord
-GET     /pcms/v1/takehomeration/report/:awCode                      controllers.TakeHomeRationController.report(awCode)
-GET     /pcms/v1/takehomeration/dashboard/:stateCode                controllers.TakeHomeRationController.dashboard(stateCode)
+GET     /pcms/v1/takehomeration/report/:awCode/:date                      controllers.TakeHomeRationController.report(awCode, date)
+GET     /pcms/v1/takehomeration/dashboard/:stateCode/:date                controllers.TakeHomeRationController.dashboard(stateCode, date)
 
 POST    /pcms/v1/sewikaattendance-entry                             controllers.SewikaAttendanceController.addLogRecord
-GET     /pcms/v1/sewikaattendance/report/:awCode                    controllers.SewikaAttendanceController.report(awCode)
+GET     /pcms/v1/sewikaattendance/report/:awCode/:date                    controllers.SewikaAttendanceController.report(awCode, date)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                               controllers.Assets.versioned(path="/public", file: Asset)

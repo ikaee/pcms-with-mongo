@@ -21,7 +21,7 @@ case object TakeHomeRation extends Activity {
 }
 
 case object SewikaAttendance extends Activity {
-  override val reportingKey: String = "master-logi"
+  override val reportingKey: String = "master-login"
   override val dashboardKey: String = "sewika-attendance-dashboard"
 }
 

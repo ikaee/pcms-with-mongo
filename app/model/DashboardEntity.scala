@@ -33,13 +33,13 @@ case class DashboardEntity(
 
 object DashboardEntity {
 
-  def defaultFor = (activity: Activity) => (date: String) =>
+  def defaultFor = (activity: Activity) => (date: String) =>  (code: String) => (totalCount: String) =>
     DashboardEntity(
       doctype = activity.dashboardKey,
-      code = "27",
+      code = code,
       percentage = "0",
       presentcount = "0",
-      totalcount = "0",
+      totalcount = totalCount,
       malecount = "0",
       femalecount = "0",
       zerotoonecount = "0",
@@ -63,6 +63,6 @@ object DashboardEntity {
       currentdate = date
     )
 
-  def fromJson(json: String): DashboardEntity = new Gson().fromJson(json, DashboardEntity.getClass)
+  def fromJson(json: String): DashboardEntity = new Gson().fromJson(json, classOf[DashboardEntity])
 
 }

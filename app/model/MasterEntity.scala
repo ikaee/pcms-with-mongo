@@ -19,6 +19,6 @@ case class MasterEntity(
 
 object MasterEntity {
 
-  def fromJson(body: String): MasterEntity = new Gson().fromJson(body, MasterEntity.getClass)
+  def fromJson(body: String): MasterEntity = new Gson().fromJson(body, classOf[MasterEntity])
 
 }

@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import model.{Activity, DashboardEntity, LogEntity, MasterEntity}
 import org.mongodb.scala.MongoClient
 import org.mongodb.scala.bson.BsonDocument
+import org.mongodb.scala.bson.collection.immutable.Document
 import org.mongodb.scala.model.Filters.{and, equal}
 import subscriber.{collectionTyrion, databaseTheWall, mongoDbHost}
 
@@ -20,10 +21,10 @@ object AggregationService {
     insertLogRecord(body)
     val logEntity = createLogEntity(body)
     val masterEntity = fetchMasterInfo(logEntity)
-    val dashboardEntity = fetchDashboardEntity(logEntity.schoolcode.take(2))(activity)(logEntity.datestamp)
+    val dashboardEntity = fetchDashboardEntity(logEntity)(activity)
     deleteFromDb(activity)(dashboardEntity)
-    val updateDashboardEntity = updateDashboardEntity(logEntity)(masterEntity)(dashboardEntity)
-    saveToDb(updateDashboardEntity)
+    val updatedDashboardEntity = updateDashboardEntity(logEntity)(masterEntity)(dashboardEntity)
+    saveToDb(updatedDashboardEntity)
   }
 
   private val createLogEntity = (body: String) => {
@@ -39,17 +40,15 @@ object AggregationService {
           .find(
             and(
               equal("doctype", "child"),
-              equal("schoolcode", ae.schoolcode),
-              equal("studentcode", ae.studentcode),
-              equal("datestamp", ae.datestamp),
-              equal("timestamp", ae.timestamp)))
+              equal("aanganwadicode", ae.schoolcode),
+              equal("childcode", ae.studentcode)))
           .first()
           .toFuture(),
         Duration.Inf
       ).toJson())
   }
 
-  private val fetchDashboardEntity = (stateCode: String) => (activity: Activity) => (date: String) => {
+  private val fetchDashboardEntity = (logEntity: LogEntity) => (activity: Activity) => {
     Try(DashboardEntity.fromJson(
       Await.result(
         MongoClient(mongoDbHost)
@@ -58,12 +57,30 @@ object AggregationService {
           .find(
             and(
               equal("doctype", activity.dashboardKey),
-              equal("code", stateCode),
-              equal("currentdate", date)))
+              equal("code", logEntity.schoolcode.take(2)),
+              equal("currentdate", logEntity.datestamp)))
           .first()
           .toFuture(),
         Duration.Inf
-      ).toJson())).fold(_ => DashboardEntity.defaultFor(activity)(date), x => x)
+      ).toJson())).fold(_ => createDefaultDashboardEntity(logEntity)(activity), x => x)
+  }
+
+  private val createDefaultDashboardEntity = (logEntity: LogEntity) => (activity: Activity) => {
+    DashboardEntity.defaultFor(activity)(logEntity.datestamp)(logEntity.schoolcode.take(2))(fetchMasterInfoCount(logEntity).toString)
+  }
+
+  private val fetchMasterInfoCount = (entity: LogEntity) => {
+    Await.result(
+      MongoClient(mongoDbHost)
+        .getDatabase(databaseTheWall)
+        .getCollection(collectionTyrion)
+        .find(
+          and(
+            equal("doctype", "child"),
+            equal("aanganwadicode", entity.schoolcode)))
+        .toFuture(),
+      Duration.Inf
+    ).size
   }
 
   private val updateDashboardEntity = (le: LogEntity) => (me: MasterEntity) => (de: DashboardEntity) => {
@@ -72,7 +89,8 @@ object AggregationService {
 
   private val updatePresentCount = (de: DashboardEntity) => {
     val updatedCount = (de.presentcount.toInt + 1).toString
-    de.copy(presentcount = updatedCount, percentage = ((updatedCount.toInt / de.totalcount.toInt) * 100).toString)
+    val percentage = Try(((updatedCount.toInt * 100) / de.totalcount.toInt).toString).fold(_ => "0", x => x)
+    de.copy(presentcount = updatedCount, percentage = percentage)
   }
 
   private val updateGenderCount = (me: MasterEntity) => (de: DashboardEntity) => {
@@ -83,10 +101,10 @@ object AggregationService {
   private val updateAgeCount = (me: MasterEntity) => (de: DashboardEntity) => {
     val ageInMonths = getAgeInMonths(s"${me.dayofbirth}-${me.monthofbirth}-${me.yearofbirth}")
     if (ageInMonths <= 12) de.copy(zerotoonecount = (de.zerotoonecount.toInt + 1).toString)
-    if (ageInMonths > 12 && ageInMonths <= 24) de.copy(onetotwocount = (de.onetotwocount.toInt + 1).toString)
-    if (ageInMonths > 24 && ageInMonths <= 36) de.copy(twotothreecount = (de.twotothreecount.toInt + 1).toString)
-    if (ageInMonths > 36 && ageInMonths <= 48) de.copy(threetofourcount = (de.threetofourcount.toInt + 1).toString)
-    if (ageInMonths > 48 && ageInMonths <= 60) de.copy(fourtofivecount = (de.fourtofivecount.toInt + 1).toString)
+    else if (ageInMonths > 12 && ageInMonths <= 24) de.copy(onetotwocount = (de.onetotwocount.toInt + 1).toString)
+    else if (ageInMonths > 24 && ageInMonths <= 36) de.copy(twotothreecount = (de.twotothreecount.toInt + 1).toString)
+    else if (ageInMonths > 36 && ageInMonths <= 48) de.copy(threetofourcount = (de.threetofourcount.toInt + 1).toString)
+    else if (ageInMonths > 48 && ageInMonths <= 60) de.copy(fourtofivecount = (de.fourtofivecount.toInt + 1).toString)
     else de.copy(fivetosixcount = (de.fivetosixcount.toInt + 1).toString)
   }
 
@@ -144,7 +162,7 @@ object AggregationService {
       MongoClient(mongoDbHost)
         .getDatabase(databaseTheWall)
         .getCollection(collectionTyrion)
-        .insertOne(BsonDocument(new Gson().toJson(body)))
+        .insertOne(Document(body))
         .toFuture(),
       Duration.Inf
     ).toString()
@@ -155,7 +173,7 @@ object AggregationService {
         MongoClient(mongoDbHost)
           .getDatabase(databaseTheWall)
           .getCollection(collectionTyrion)
-          .find(and(equal("doctype", activity.reportingKey), equal("aanganwadicode", awCode), equal("datestamp", date)))
+          .find(and(equal("doctype", activity.reportingKey), equal("schoolcode", awCode), equal("datestamp", date)))
           .toFuture(),
         Duration.Inf
       ).map(_.toJson())
@@ -167,11 +185,10 @@ object AggregationService {
       MongoClient(mongoDbHost)
         .getDatabase(databaseTheWall)
         .getCollection(collectionTyrion)
-        .find(and(equal("doctype", activity.dashboardKey), equal("code", sCode), equal("datestamp", date)))
+        .find(and(equal("doctype", activity.dashboardKey), equal("code", sCode), equal("currentdate", date)))
         .first()
         .toFuture(),
-      Duration.Inf
-    ).toJson()
+      Duration.Inf).toJson()
   }
 
 }

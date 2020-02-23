@@ -16,8 +16,4 @@ class SewikaAttendanceController @Inject()(val controllerComponents: ControllerC
     Ok(AggregationService.report(awCode, date, SewikaAttendance))
   }
 
-  def dashboard(sCode: String, date: String) = Action { implicit request: Request[AnyContent] =>
-    Ok(AggregationService.dashboard(sCode, date, SewikaAttendance))
-  }
-
 }

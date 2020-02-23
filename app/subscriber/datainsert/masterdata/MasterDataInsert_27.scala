@@ -2,10 +2,11 @@ package subscriber.datainsert.masterdata
 
 
 import com.google.gson.Gson
+import model.DashboardEntity
 import org.mongodb.scala.MongoClient
 import org.mongodb.scala.bson.BsonDocument
-import subscriber.aggregation.dataobjects._
 import subscriber._
+import subscriber.aggregation.dataobjects._
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
@@ -97,24 +98,31 @@ object DataInsert {
       Duration.Inf)
     println(result)
   }
+
+  def insertEmptyAttendanceDashboardData(dashboardEntity: DashboardEntity): Unit = {
+    val result = Await.result(
+      MongoClient(mongoDbHost)
+        .getDatabase(databaseTheWall)
+        .getCollection(collectionTyrion)
+        .insertOne(BsonDocument(new Gson().toJson(dashboardEntity)))
+        .toFuture(),
+      Duration.Inf)
+    println(result)
+  }
 }
 
 object MasterAanganwadiInsert_27 extends App {
 
   import DataInsert._
 
-//  insertMasterAanganwadiData(MasterAanganwadiDataEntity("aanganwadi", "27511010507", "awc-1"))
-//  insertMasterSectorData(MasterSectorDataEntity("sector", "275110105", "sector-1"))
-//  insertMasterProjectData(MasterProjectDataEntity("project", "2751101", "project-1"))
-//  insertMasterDistrictData(MasterDistrictDataEntity("district", "27511", "district-1"))
-//  insertMasterStateData(MasterStateDataEntity("state", "27", "state-1"))
-  insertEmptyDashboardData(TyrionEntity("dashboard", "27", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "02", "20"))
-  //    insertMasterAanganwadiData(MasterAanganwadiDataEntity("aanganwadi","27511010407","KONDHA 4"))
-  //    insertMasterAanganwadiData(MasterAanganwadiDataEntity("aanganwadi","27511010109","LAHAN 4"))
-  //    insertMasterAanganwadiData(MasterAanganwadiDataEntity("aanganwadi","27511010111","LAHAN 6"))
-  //    insertMasterAanganwadiData(MasterAanganwadiDataEntity("aanganwadi","27511010305","MALEGAON-3"))
-  //    insertMasterAanganwadiData(MasterAanganwadiDataEntity("aanganwadi","27511010306","MALEGAON-4"))
-  //
+  //  insertMasterAanganwadiData(MasterAanganwadiDataEntity("aanganwadi", "27511010507", "awc-1"))
+  //  insertMasterSectorData(MasterSectorDataEntity("sector", "275110105", "sector-1"))
+  //  insertMasterProjectData(MasterProjectDataEntity("project", "2751101", "project-1"))
+  //  insertMasterDistrictData(MasterDistrictDataEntity("district", "27511", "district-1"))
+  //  insertMasterStateData(MasterStateDataEntity("state", "27", "state-1"))
+  //  insertEmptyDashboardData(TyrionEntity("dashboard", "27", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "02", "20"))
+  insertEmptyAttendanceDashboardData(DashboardEntity("attendance-dashboard", "27", "0", "0", "5", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "23-02-2020"))
+
 }
 
 //

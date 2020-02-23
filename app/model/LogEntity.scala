@@ -17,6 +17,6 @@ case class LogEntity(
 
  object LogEntity {
 
-   def fromJson(json: String): LogEntity = new Gson().fromJson(json, LogEntity.getClass)
+   def fromJson(json: String): LogEntity = new Gson().fromJson(json, classOf[LogEntity])
 
  }
