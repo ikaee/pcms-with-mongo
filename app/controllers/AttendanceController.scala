@@ -1,58 +1,23 @@
 package controllers
 
-import com.google.gson.Gson
 import javax.inject._
-import org.mongodb.scala.bson.BsonDocument
-import org.mongodb.scala.model.Filters.{and, equal}
-import org.mongodb.scala.{Document, MongoClient}
+import model.Attendance
 import play.api.mvc._
-import subscriber.{collectionTyrion, databaseTheWall, mongoDbHost}
-
-import scala.concurrent.Await
-import scala.concurrent.duration.Duration
+import service.AggregationService
 
 @Singleton
 class AttendanceController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
 
   def addLogRecord() = Action { implicit request: Request[AnyContent] =>
-    val results =
-      Await.result(
-        MongoClient(mongoDbHost)
-          .getDatabase(databaseTheWall)
-          .getCollection(collectionTyrion)
-          .insertOne(BsonDocument(new Gson().toJson(request.body.asText.get)))
-          .toFuture(),
-        Duration.Inf
-      )
-    Ok(results.toString())
+    Ok(AggregationService.addLogRecord(request.body.asText.get))
   }
 
-  def report(awCode: String) = Action { implicit request: Request[AnyContent] =>
-    case class GMR(seq: Seq[String])
-    val results =
-      Await.result(
-        MongoClient(mongoDbHost)
-          .getDatabase(databaseTheWall)
-          .getCollection(collectionTyrion)
-          .find(and(equal("doctype", "attendance"), equal("aanganwadicode", awCode)))
-          .toFuture(),
-        Duration.Inf
-      ).map(_.toJson())
-    Ok("[" + results.mkString(", ") + "]")
+  def report(awCode: String, date: String) = Action { implicit request: Request[AnyContent] =>
+    Ok(AggregationService.report(awCode, date, Attendance))
   }
 
-  def dashboard(sCode: String) = Action { implicit request: Request[AnyContent] =>
-    val results: Document =
-      Await.result(
-        MongoClient(mongoDbHost)
-          .getDatabase(databaseTheWall)
-          .getCollection(collectionTyrion)
-          .find(and(equal("doctype", "attendance-dashboard"), equal("code", sCode)))
-          .first()
-          .toFuture(),
-        Duration.Inf
-      )
-    Ok(results.toJson())
+  def dashboard(sCode: String, date: String) = Action { implicit request: Request[AnyContent] =>
+    Ok(AggregationService.dashboard(sCode, date, Attendance))
   }
 
 }

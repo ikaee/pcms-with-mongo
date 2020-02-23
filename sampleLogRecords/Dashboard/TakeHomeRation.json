@@ -24,7 +24,5 @@
   "octobercount" : "0",
   "novembercount" : "0",
   "decembercount" : "0",
-  "currentday" : "02",
-  "currentmonth" : "02",
-  "currentyear" : "20"
+  "currentdate" : "01-01-2000"
 }
