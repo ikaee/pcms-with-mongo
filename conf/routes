@@ -14,12 +14,15 @@ POST    /pcms/v1/attendance-entry                                   controllers.
 GET     /pcms/v1/attendance/report/:awCode                          controllers.AttendanceController.report(awCode)
 GET     /pcms/v1/attendance/dashboard/:stateCode                    controllers.AttendanceController.dashboard(stateCode)
 
+POST    /pcms/v1/hotcooked-entry                                    controllers.HotCookedController.addLogRecord
 GET     /pcms/v1/hotcooked/report/:awCode                           controllers.HotCookedController.report(awCode)
 GET     /pcms/v1/hotcooked/dashboard/:stateCode                     controllers.HotCookedController.dashboard(stateCode)
 
+POST    /pcms/v1/takehomeration-entry                               controllers.TakeHomeRationController.addLogRecord
 GET     /pcms/v1/takehomeration/report/:awCode                      controllers.TakeHomeRationController.report(awCode)
 GET     /pcms/v1/takehomeration/dashboard/:stateCode                controllers.TakeHomeRationController.dashboard(stateCode)
 
+POST    /pcms/v1/sewikaattendance-entry                             controllers.SewikaAttendanceController.addLogRecord
 GET     /pcms/v1/sewikaattendance/report/:awCode                    controllers.SewikaAttendanceController.report(awCode)
 
 # Map static resources from the /public folder to the /assets URL path

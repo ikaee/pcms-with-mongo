@@ -9,7 +9,7 @@ import service.AggregationService
 class AttendanceController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
 
   def addLogRecord() = Action { implicit request: Request[AnyContent] =>
-    Ok(AggregationService.addLogRecord(request.body.asText.get))
+    Ok(AggregationService.addLogRecord(request.body.asText.get, Attendance))
   }
 
   def report(awCode: String, date: String) = Action { implicit request: Request[AnyContent] =>
