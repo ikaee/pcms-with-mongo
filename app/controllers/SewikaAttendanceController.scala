@@ -21,7 +21,7 @@ class SewikaAttendanceController @Inject()(val controllerComponents: ControllerC
         MongoClient(mongoDbHost)
           .getDatabase(databaseTheWall)
           .getCollection(collectionTyrion)
-          .find(and(equal("doctype", "sewika-attendance"), equal("aanganwadicode", awCode)))
+          .find(and(equal("doctype", "master-login"), equal("aanganwadicode", awCode)))
           .toFuture(),
         Duration.Inf
       ).map(_.toJson())
