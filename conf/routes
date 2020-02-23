@@ -4,8 +4,23 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                                   controllers.HomeController.index
-POST    /bfr/v1/growth-monitoring-entry     controllers.GrowthMonitoringEntry.entry
+GET     /                                                           controllers.HomeController.index
+
+POST    /pcms/v1/growth-monitoring-entry                            controllers.GrowthMonitoringController.addLogRecord
+GET     /pcms/v1/growthmonitoring/report/:awCode                    controllers.GrowthMonitoringController.report(awCode)
+GET     /pcms/v1/growthmonitoring/dashboard/:stateCode              controllers.GrowthMonitoringController.dashboard(stateCode)
+
+POST    /pcms/v1/attendance-entry                                   controllers.AttendanceController.addLogRecord
+GET     /pcms/v1/attendance/report/:awCode                          controllers.AttendanceController.report(awCode)
+GET     /pcms/v1/attendance/dashboard/:stateCode                    controllers.AttendanceController.dashboard(stateCode)
+
+GET     /pcms/v1/hotcooked/report/:awCode                           controllers.HotCookedController.report(awCode)
+GET     /pcms/v1/hotcooked/dashboard/:stateCode                     controllers.HotCookedController.dashboard(stateCode)
+
+GET     /pcms/v1/takehomeration/report/:awCode                      controllers.TakeHomeRationController.report(awCode)
+GET     /pcms/v1/takehomeration/dashboard/:stateCode                controllers.TakeHomeRationController.dashboard(stateCode)
+
+GET     /pcms/v1/sewikaattendance/report/:awCode                    controllers.SewikaAttendanceController.report(awCode)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                               controllers.Assets.versioned(path="/public", file: Asset)
