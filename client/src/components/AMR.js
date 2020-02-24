@@ -117,11 +117,10 @@ class AMR extends Component {
             .then(({data}) => {
                 this.setState({
                     loaded: true,
-                    data
+                    reportData : data
                 })
             })
             .catch(err => {
-
             })
     }
 

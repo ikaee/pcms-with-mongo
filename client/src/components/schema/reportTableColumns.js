@@ -10,7 +10,7 @@ export const reportTableColumns = [
         accessor: 'lastname'
     }, {
         Header: 'Gender',
-        accessor: 'gender'
+        accessor: 'sex'
     }, {
         Header: 'Dob',
         accessor: 'dob'
@@ -20,4 +20,17 @@ export const reportTableColumns = [
     }, {
         Header: 'Image',
         accessor: 'image'
-    }]
+    },
+    {
+        Header: 'Timestamp',
+        accessor: 'timestamp'
+    },
+    {
+        Header: 'Lattitude',
+        accessor: 'lattitude'
+    },
+    {
+        Header: 'Longitude',
+        accessor: 'longitude'
+    }
+    ]
