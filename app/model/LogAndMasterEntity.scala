@@ -11,6 +11,7 @@ case class LogAndMasterEntity(
                                sex: String,
                                firstname: String,
                                lastname: String,
+                               timestamp: String,
                                datestamp: String
                              )
 
@@ -28,7 +29,8 @@ object LogAndMasterEntity {
       masterEntity.sex,
       masterEntity.name,
       masterEntity.fathername,
-      s"${logEntity.datestamp} ${logEntity.timestamp}"
+      s"${logEntity.datestamp} ${logEntity.timestamp}",
+      logEntity.datestamp
     )
   }
 
