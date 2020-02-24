@@ -185,14 +185,15 @@ object AggregationService {
   }
 
   def dashboard(sCode: String, date: String, activity: Activity) = {
-    Await.result(
+    Try(Await.result(
       MongoClient(mongoDbHost)
         .getDatabase(databaseTheWall)
         .getCollection(collectionTyrion)
         .find(and(equal("doctype", activity.dashboardKey), equal("code", sCode), equal("currentdate", date)))
         .first()
         .toFuture(),
-      Duration.Inf).toJson()
+      Duration.Inf).toJson())
+      .fold(_ => DashboardEntity.defaultStringFor(activity)(date)(sCode)("0"), x => x)
   }
 
 }
