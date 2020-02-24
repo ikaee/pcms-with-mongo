@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.{Calendar, Date, GregorianCalendar}
 
 import com.google.gson.Gson
-import model.{Activity, DashboardEntity, LogEntity, MasterEntity}
+import model.{Activity, DashboardEntity, LogAndMasterEntity, LogEntity, MasterEntity}
 import org.mongodb.scala.MongoClient
 import org.mongodb.scala.bson.BsonDocument
 import org.mongodb.scala.bson.collection.immutable.Document
@@ -18,10 +18,10 @@ import scala.util.Try
 object AggregationService {
 
   def addLogRecord(body: String, activity: Activity) = {
-    insertLogRecord(body)
     val logEntity = createLogEntity(body)
     val masterEntity = fetchMasterInfo(logEntity)
     val dashboardEntity = fetchDashboardEntity(logEntity)(activity)
+    insertLogRecord(logEntity)(masterEntity)
     deleteFromDb(activity)(dashboardEntity)
     val updatedDashboardEntity = updateDashboardEntity(logEntity)(masterEntity)(dashboardEntity)
     saveToDb(updatedDashboardEntity)
@@ -157,15 +157,19 @@ object AggregationService {
     ).toString()
   }
 
-  private val insertLogRecord = (body: String) =>
+  private val insertLogRecord = (logEntity: LogEntity) => (masterEntity: MasterEntity) => {
     Await.result(
       MongoClient(mongoDbHost)
         .getDatabase(databaseTheWall)
         .getCollection(collectionTyrion)
-        .insertOne(Document(body))
+        .insertOne(Document(createLogRecord(logEntity)(masterEntity)))
         .toFuture(),
       Duration.Inf
     ).toString()
+  }
+
+  private val createLogRecord = (logEntity: LogEntity) => (masterEntity: MasterEntity) =>
+    new Gson().toJson(LogAndMasterEntity.createFrom(logEntity)(masterEntity))
 
   def report(awCode: String, date: String, activity: Activity) = {
     val results =
