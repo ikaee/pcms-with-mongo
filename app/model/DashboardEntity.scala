@@ -33,6 +33,9 @@ case class DashboardEntity(
 
 object DashboardEntity {
 
+  def defaultStringFor  = (activity: Activity) => (date: String) =>  (code: String) => (totalCount: String) =>
+    new Gson().toJson(defaultFor(activity)(date)(code)(totalCount))
+
   def defaultFor = (activity: Activity) => (date: String) =>  (code: String) => (totalCount: String) =>
     DashboardEntity(
       doctype = activity.dashboardKey,
