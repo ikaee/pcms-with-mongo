@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MetricsDashboard = ({total = 0, present = 0, percentage = 0}) => (
+const MetricsDashboard = ({data: {totalcount = 0, presentcount = 0, percentage = 0}}) => (
     <div>
         <div className="row state-overview">
             <div className="col-lg-4 col-sm-6" >
@@ -10,7 +10,7 @@ const MetricsDashboard = ({total = 0, present = 0, percentage = 0}) => (
                     </div>
                     <div className="value">
                         <h1 className="count">
-                            {present}
+                            {presentcount}
                         </h1>
                         <p>Present</p>
                     </div>
@@ -23,7 +23,7 @@ const MetricsDashboard = ({total = 0, present = 0, percentage = 0}) => (
                     </div>
                     <div className="value">
                         <h1 className=" count2">
-                            {total}
+                            {totalcount}
                         </h1>
                         <p>Total</p>
                     </div>

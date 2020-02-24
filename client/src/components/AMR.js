@@ -10,18 +10,28 @@ import Loader from "react-loader";
 import 'react-datepicker/dist/react-datepicker.css';
 import {advaya_attendance, fetchAanganwadis, fetchAMRLog, fetchBeneficiaryImage} from "../utils/WebApi";
 import {reportTableColumns} from "./schema/reportTableColumns";
+import DatePicker from "react-datepicker";
+import moment from "moment";
 
 class AMR extends Component {
 
     constructor() {
         super();
         this.state = {
+            selectedDate: moment(),
             selectedOption: '',
-            options: [],
+            options: ['27511010507','27511010508'],
             reportData: [],
             loaded: false
         }
     }
+
+    handleChange = date => {
+
+        this.setState({
+            selectedDate: date
+        });
+    };
 
 
     addImageLink = record => {
@@ -35,7 +45,6 @@ class AMR extends Component {
     addImage = record => {
         this.setState({loaded: false});
         const MIME = "data:image/jpeg;base64,";
-        console.log(record.imageuri)
         fetchBeneficiaryImage(`${advaya_attendance}/${record.imageuri}`).then(res => {
             const image = <img src={MIME + res.data} style={{"height": "40px", "width": "40px"}}/>;
             const newRecord = Object.assign({}, record, {"image": image})
@@ -76,6 +85,14 @@ class AMR extends Component {
         return (
             <section className="wrapper state-overview">
                 <Loader loaded={this.state.loaded} top="50%" left="55%">
+                    <div>
+                        <DatePicker
+                            selected={this.state.selectedDate}
+                            onChange={this.handleChange}
+                            dateFormat="DD-MM-YYYY"
+                            name = 'Select Date'
+                        />
+                    </div>
                     <Select
                         style={{width: "95%"}}
                         value={value}
@@ -96,14 +113,16 @@ class AMR extends Component {
     }
 
     componentDidMount = () => {
-        fetchAanganwadis().then(({data}) => {
-            this.setState({
-                options: data,
-                loaded: true
+        axios.get(`/pcms/v1/attendance/report/27511010507/${this.state.selectedDate.format("DD-MM-YYYY")}`)
+            .then(({data}) => {
+                this.setState({
+                    loaded: true,
+                    data
+                })
             })
-        }).catch(err => {
-            this.setState({loaded: true})
-        })
+            .catch(err => {
+
+            })
     }
 
 }

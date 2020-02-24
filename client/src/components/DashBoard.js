@@ -68,14 +68,7 @@ class Dashboard extends Component {
         return (
 
             <section className="wrapper">
-                <div>
-                    <Select
-                        style={{width: "95%"}}
-                        value={value}
-                        onChange={this.onHandleChange}
-                        options={options}
-                    />
-                </div>
+
                 <Loader loaded={this.state.loaded} top="50%" left="55%">
                     <div style={{height: '20px',  fontSize: '20px', paddingBottom: '30px'}}>
                         <label > {this.state.selectedOption.label} Dashboard</label>
