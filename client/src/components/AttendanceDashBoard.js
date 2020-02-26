@@ -20,16 +20,18 @@ class AttendanceDashboard extends Component {
             loaded: true
         };
     }
+    componentDidUpdate(prevProps,prevState) {
+      if (this.state.selectedDate !== prevState.selectedDate) {
+           this.fetchData(this.state.selectedDate)
+      }
+    }
 
-    handleChange = date => {
-        console.log("handle change called, ${date}", date)
-        this.setState({
-            selectedDate: date
-        });
-    };
+    componentDidMount = () => {
+      this.fetchData(this.state.selectedDate)
+    }
 
-    componentDidMount() {
-        axios.get(`/pcms/v1/attendance/dashboard/27/${this.state.selectedDate.format("DD-MM-YYYY")}`)
+    fetchData = date => {
+        axios.get(`/pcms/v1/attendance/dashboard/27/${date.format("DD-MM-YYYY")}`)
             .then(({data}) => {
                 this.setState({
                     loaded: true,
@@ -42,6 +44,12 @@ class AttendanceDashboard extends Component {
             })
     }
 
+    handleChange = date => {
+        console.log("handle change called, ${date}", date)
+        this.setState({
+            selectedDate: date
+        });
+    };
 
     render() {
         const {

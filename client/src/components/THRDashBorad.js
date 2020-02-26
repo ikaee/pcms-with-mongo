@@ -29,19 +29,29 @@ class THRDashBorad extends Component {
         });
     };
 
-    componentDidMount() {
-        axios.get(`/pcms/v1/takehomeration/dashboard/27/${this.state.selectedDate.format("DD-MM-YYYY")}`)
+    componentDidUpdate(prevProps,prevState) {
+      if (this.state.selectedDate !== prevState.selectedDate) {
+           this.fetchData(this.state.selectedDate)
+      }
+    }
+
+    componentDidMount = () => {
+      this.fetchData(this.state.selectedDate)
+    }
+
+    fetchData = date => {
+        axios.get(`/pcms/v1/takehomeration/dashboard/27/${date.format("DD-MM-YYYY")}`)
             .then(({data}) => {
                 this.setState({
                     loaded: true,
                     data
                 })
+            console.log(data.percentage)
             })
             .catch(err => {
 
             })
     }
-
 
     render() {
         const {

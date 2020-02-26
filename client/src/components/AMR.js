@@ -33,6 +33,28 @@ class AMR extends Component {
         });
     };
 
+    fetchData = date => {
+      axios.get(`/pcms/v1/attendance/report/27511010507/${date.format("DD-MM-YYYY")}`)
+           .then(({data}) => {
+
+               this.setState({
+                   loaded: true,
+                   reportData : data.map(a => imageGenartion(a))
+               })
+           })
+           .catch(err => {
+           })
+    }
+
+    componentDidUpdate(prevProps,prevState) {
+      if (this.state.selectedDate !== prevState.selectedDate) {
+           this.fetchData(this.state.selectedDate)
+      }
+    }
+
+    componentDidMount = () => {
+      this.fetchData(this.state.selectedDate)
+    }
 
     addImageLink = record => {
         return Object.assign({}, record, {
@@ -57,9 +79,6 @@ class AMR extends Component {
             this.setState({loaded: true})
         })
     }
-
-
-
 
     onHandleChange = selectedOption => {
         this.setState({loaded: false});
@@ -112,19 +131,6 @@ class AMR extends Component {
               </Loader>
             </section>
         )
-    }
-
-    componentDidMount = () => {
-        axios.get(`/pcms/v1/attendance/report/27511010507/${this.state.selectedDate.format("DD-MM-YYYY")}`)
-            .then(({data}) => {
-
-                this.setState({
-                    loaded: true,
-                    reportData : data.map(a => imageGenartion(a))
-                })
-            })
-            .catch(err => {
-            })
     }
 
 }

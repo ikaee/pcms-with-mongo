@@ -27,21 +27,29 @@ class MealDashBorad extends Component {
           selectedDate: date
       });
   };
+  componentDidUpdate(prevProps,prevState) {
+    if (this.state.selectedDate !== prevState.selectedDate) {
+         this.fetchData(this.state.selectedDate)
+    }
+  }
 
-  componentDidMount() {
-      axios.get(`/pcms/v1/hotcooked/dashboard/27/${this.state.selectedDate.format("DD-MM-YYYY")}`)
+  componentDidMount = () => {
+    this.fetchData(this.state.selectedDate)
+  }
+
+  fetchData = date => {
+      axios.get(`/pcms/v1/hotcooked/dashboard/27/${date.format("DD-MM-YYYY")}`)
           .then(({data}) => {
               this.setState({
                   loaded: true,
                   data
               })
+          console.log(data.percentage)
           })
           .catch(err => {
 
           })
   }
-
-
   render() {
       const {
           percentage, presentcount, totalcount, malecount, femalecount,

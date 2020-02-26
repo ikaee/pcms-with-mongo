@@ -33,7 +33,28 @@ class AMR extends Component {
             selectedDate: date
         });
     };
+    fetchData = date => {
+      axios.get(`/pcms/v1/hotcooked/report/27511010507/${date.format("DD-MM-YYYY")}`)
+           .then(({data}) => {
 
+               this.setState({
+                   loaded: true,
+                   reportData : data.map(a => imageGenartion(a))
+               })
+           })
+           .catch(err => {
+           })
+    }
+
+    componentDidUpdate(prevProps,prevState) {
+      if (this.state.selectedDate !== prevState.selectedDate) {
+           this.fetchData(this.state.selectedDate)
+      }
+    }
+
+    componentDidMount = () => {
+      this.fetchData(this.state.selectedDate)
+    }
 
     addImageLink = record => {
         return Object.assign({}, record, {
@@ -112,19 +133,6 @@ class AMR extends Component {
             </section>
         )
     }
-
-    componentDidMount = () => {
-        axios.get(`/pcms/v1/hotcooked/report/27511010507/${this.state.selectedDate.format("DD-MM-YYYY")}`)
-            .then(({data}) => {
-                this.setState({
-                    loaded: true,
-                    reportData : data.map(r => imageGenartion(r))
-                })
-            })
-            .catch(err => {
-            })
-    }
-
 }
 
 export default AMR;

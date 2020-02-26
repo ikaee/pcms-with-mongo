@@ -26,6 +26,28 @@ class AMR extends Component {
             loaded: false
         }
     }
+    fetchData = date => {
+      axios.get(`/pcms/v1/takehomeration/report/27511010507/${date.format("DD-MM-YYYY")}`)
+           .then(({data}) => {
+
+               this.setState({
+                   loaded: true,
+                   reportData : data.map(a => imageGenartion(a))
+               })
+           })
+           .catch(err => {
+           })
+    }
+
+    componentDidUpdate(prevProps,prevState) {
+      if (this.state.selectedDate !== prevState.selectedDate) {
+           this.fetchData(this.state.selectedDate)
+      }
+    }
+
+    componentDidMount = () => {
+      this.fetchData(this.state.selectedDate)
+    }
 
     handleChange = date => {
 
@@ -113,17 +135,7 @@ class AMR extends Component {
         )
     }
 
-    componentDidMount = () => {
-        axios.get(`/pcms/v1/takehomeration/report/27511010507/${this.state.selectedDate.format("DD-MM-YYYY")}`)
-            .then(({data}) => {
-                this.setState({
-                    loaded: true,
-                    reportData : data.map(a => imageGenartion(a))
-                })
-            })
-            .catch(err => {
-            })
-    }
+
 
 }
 
