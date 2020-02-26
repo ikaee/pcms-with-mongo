@@ -11,7 +11,7 @@ import moment from "moment";
 import {Router} from "react-router";
 import {Link} from "react-router-dom";
 
-class GrothMonitoringDashbord extends Component {
+class GrowthMonitoringDashbord extends Component {
     constructor() {
         super();
         this.state = {
@@ -123,4 +123,4 @@ class GrothMonitoringDashbord extends Component {
 }
 
 
-export default GrothMonitoringDashbord;
+export default GrowthMonitoringDashbord;

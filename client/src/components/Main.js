@@ -12,7 +12,7 @@ import NavMenu from "./NavMenu";
 import Header from "./Header";
 import HotCooked from "./HotCooked";
 import AttendanceDashboard from "./AttendanceDashBoard";
-import GrothMonitoringDashboard from "./GrothMonitoringDashboard";
+import GrowthMonitoringDashboard from "./GrowthMonitoringDashboard";
 import MealDashBorad from "./MealDashBorad";
 import THRDashBorad from "./THRDashBorad";
 import SewikaAttendance from "./SewikaAttancdance";
@@ -26,7 +26,7 @@ export default () =>
         <NavMenu/>
         <section id={"main-content"} style1={{marginLeft: 0}}>
           <Route exact path="/" component={AttendanceDashboard}/>
-          <Route path="/gm" component={GrothMonitoringDashboard}/>
+          <Route path="/gm" component={GrowthMonitoringDashboard}/>
           <Route path="/hm" component={MealDashBorad}/>
           <Route path="/th" component={THRDashBorad}/>
           <Route path="/thr" component={THR} />

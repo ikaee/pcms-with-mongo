@@ -32,6 +32,21 @@ class GMR extends Component {
             selectedDate: date
         });
     };
+    
+    componentDidMount = () => {
+
+        axios.get(`/pcms/v1/growthmonitoring/report/27511010507`)
+            .then(({data}) => {
+                this.setState({
+                    loaded: true,
+                    reportData : data
+                })
+                data.forEach(a => console.log(a))
+            })
+            .catch(err => {
+            })
+    }
+
 
 
     addImageLink = record => {
@@ -112,19 +127,7 @@ class GMR extends Component {
         )
     }
 
-    componentDidMount = () => {
 
-        axios.get(`/pcms/v1/growthmonitoring/report/27511010507`)
-            .then(({data}) => {
-                this.setState({
-                    loaded: true,
-                    reportData : data
-                })
-                data.forEach(a => console.log(a))
-            })
-            .catch(err => {
-            })
-    }
 
 }
 
