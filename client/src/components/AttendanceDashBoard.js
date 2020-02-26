@@ -9,6 +9,7 @@ import Loader from "react-loader";
 import axios from 'axios';
 import moment from "moment";
 import {Router} from "react-router";
+import {Link} from "react-router-dom";
 
 class AttendanceDashboard extends Component {
     constructor() {
@@ -34,6 +35,7 @@ class AttendanceDashboard extends Component {
                     loaded: true,
                     data
                 })
+            console.log(data.percentage)
             })
             .catch(err => {
 
@@ -82,24 +84,38 @@ class AttendanceDashboard extends Component {
 
         return (
             <section className="wrapper">
-                <Loader loaded={this.state.loaded} top="50%" left="55%">
-                    <div>
-                        <DatePicker
-                            selected={this.state.selectedDate}
-                            onChange={this.handleChange}
-                            dateFormat="DD-MM-YYYY"
-                        />
-                    </div>
-                    <div style={{height: '20px', fontSize: '20px', paddingBottom: '30px'}}>
-                        <label> Attendance Dashboard</label>
-                    </div>
-                    <div>
-                        <MetricsDashboard data={metrics_data}/>
-                        <MonthWise title='Month wise' data={month_data}/>
-                        <GenderWise title='Gender Wise' data={gender_data}/>
-                        <AgeWise title="Age wise" data={age_data}/>
-                    </div>
-                </Loader>
+              <Loader loaded={this.state.loaded} top="50%" left="55%">
+                <div className="dashbord-top-panel">
+                  <div className="heading" >
+                    <label> Attendance Dashboard</label>
+                  </div>
+                  <div className="detail-report-link">
+                    <Link to={"/amr"}>
+                      <span>View Detail Report</span>
+                    </Link>
+                  </div>
+                  <div className="dashbord-calender">
+                    <span className="date-title"> Date:</span>
+                    <DatePicker
+                      selected={this.state.selectedDate}
+                      onChange={this.handleChange}
+                      dateFormat="DD-MM-YYYY"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-lg-10 col-sm-6" style={{backgroundColor: "white", width: "850px", borderRadius: '7px'}}>
+                    <MetricsDashboard data={metrics_data}/>
+                    <MonthWise title='Monthly Distributed' data={month_data}/>
+                  </div>
+                  <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", marginBottom: "2%", backgroundColor: "white", height: "235px", borderRadius:'7px'}}>
+                    <GenderWise title='Gender Wise' data={gender_data}/>
+                  </div>
+                  <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", backgroundColor: "white", borderRadius: '7px'}}>
+                    <AgeWise title="Age wise" data={age_data}/>
+                  </div>
+                </div>
+              </Loader>
             </section>
 
         )

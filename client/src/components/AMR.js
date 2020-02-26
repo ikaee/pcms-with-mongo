@@ -12,7 +12,7 @@ import {advaya_attendance, fetchAanganwadis, fetchAMRLog, fetchBeneficiaryImage}
 import {reportTableColumns} from "./schema/reportTableColumns";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-
+import {imageGenartion} from "../utils/ImageUtil"
 class AMR extends Component {
 
     constructor() {
@@ -59,6 +59,8 @@ class AMR extends Component {
     }
 
 
+
+
     onHandleChange = selectedOption => {
         this.setState({loaded: false});
         Option(selectedOption).fold(
@@ -84,30 +86,30 @@ class AMR extends Component {
         const value = selectedOption && selectedOption.value;
         return (
             <section className="wrapper state-overview">
-                <Loader loaded={this.state.loaded} top="50%" left="55%">
-                    <div>
-                        <DatePicker
-                            selected={this.state.selectedDate}
-                            onChange={this.handleChange}
-                            dateFormat="DD-MM-YYYY"
-                            name = 'Select Date'
-                        />
-                    </div>
-                    <Select
-                        style={{width: "95%"}}
-                        value={value}
-                        onChange={this.onHandleChange}
-                        options={options}
-                    />
-                    <ReactTable
-                        style={{width: "95%", marginTop: "2%"}}
-                        data={this.state.reportData}
-                        columns={reportTableColumns}
-                        filterable
-                        defaultPageSize={5}
-                        className="-striped -highlight"
-                    />
-                </Loader>
+              <Loader loaded={this.state.loaded} top="50%" left="55%">
+                <div>
+                  <DatePicker
+                    selected={this.state.selectedDate}
+                    onChange={this.handleChange}
+                    dateFormat="DD-MM-YYYY"
+                    name = 'Select Date'
+                  />
+                </div>
+                <Select
+                  style={{width: "95%"}}
+                  value={value}
+                  onChange={this.onHandleChange}
+                  options={options}
+                />
+                <ReactTable
+                  style={{width: "95%", marginTop: "2%"}}
+                  data={this.state.reportData}
+                  columns={reportTableColumns}
+                  filterable
+                  defaultPageSize={5}
+                  className="-striped -highlight"
+                />
+              </Loader>
             </section>
         )
     }
@@ -115,9 +117,10 @@ class AMR extends Component {
     componentDidMount = () => {
         axios.get(`/pcms/v1/attendance/report/27511010507/${this.state.selectedDate.format("DD-MM-YYYY")}`)
             .then(({data}) => {
+
                 this.setState({
                     loaded: true,
-                    reportData : data
+                    reportData : data.map(a => imageGenartion(a))
                 })
             })
             .catch(err => {

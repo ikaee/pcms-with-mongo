@@ -74,17 +74,17 @@ class HotCooked extends Component {
         const value = selectedOption && selectedOption.value;
         return (
             <section className="wrapper state-overview">
-                <Loader loaded={this.state.loaded} top="50%" left="55%">
-                    <Select
-                        style={{width: "95%"}}
-                        value={value}
-                        onChange={this.onHandleChange}
-                        options={options}
-                    />
-                    <ReactTable
-                        style={{width: "95%", marginTop: "2%"}}
-                        data={this.state.reportData}
-                        columns={reportTableColumns}
+              <Loader loaded={this.state.loaded} top="50%" left="55%">
+                <Select
+                  style={{width: "95%"}}
+                  value={value}
+                  onChange={this.onHandleChange}
+                  options={options}
+                />
+                <ReactTable
+                  style={{width: "95%", marginTop: "2%"}}
+                  data={this.state.reportData}
+                  columns={reportTableColumns}
                         filterable
                         defaultPageSize={5}
                         className="-striped -highlight"

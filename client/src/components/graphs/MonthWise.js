@@ -20,16 +20,16 @@ const MonthWise = ({
                            {name: 'Dec', value: 0}]
                    }) => (
 
-    <div className="col-lg-10 col-sm-6" style={{backgroundColor: "white", width: "850px", borderRadius: '7px'}}>
-        <GraphTitle title={title}/>
-        <BarChart width={800} height={500} data={data}>
-            <XAxis dataKey="name"/>
-            <YAxis/>
-            <CartesianGrid strokeDasharray="3 3"/>
-            <Tooltip/>
-            <Legend/>
-            <Bar dataKey="value" fill="#8884d8"/>
-        </BarChart>
+    <div className="graph-table">
+      <GraphTitle title={title}/>
+      <BarChart width={800} height={500} data={data}>
+        <XAxis dataKey="name"/>
+        <YAxis/>
+        <CartesianGrid strokeDasharray="3 3"/>
+        <Tooltip/>
+        <Legend/>
+        <Bar dataKey="value" fill="#8884d8"/>
+      </BarChart>
     </div>);
 
 

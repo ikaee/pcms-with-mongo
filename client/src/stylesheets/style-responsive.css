@@ -93,6 +93,10 @@
 
 @media (max-width: 768px) {
 
+  .dashbord-top-panel .detail-report-link {
+    display: none;
+    
+  }
     .header {
         position: absolute;
     }
@@ -590,7 +594,3 @@
         line-height: 70px;
     }
 }
-
-
-
-

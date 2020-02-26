@@ -3,7 +3,7 @@
 import axios from "axios";
 
 //TODO: resolve it from env
-const advaya_analytics = "http://localhost:8081";
+const advaya_analytics = "http://localhost:8080";
 export const advaya_attendance = "http://localhost:9000";
 const advaya_takehomeration = "http://35.200.198.196";
 const advaya_hotmeal = "http://35.200.221.58";
