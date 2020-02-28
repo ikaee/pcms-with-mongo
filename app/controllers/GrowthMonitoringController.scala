@@ -3,6 +3,7 @@ package controllers
 import java.util.regex.Pattern
 
 import javax.inject._
+import model.{DashboardEntity, GrowthMonitoring, GrowthMonitoringDashboardEntity, GrowthMonitoringLogEntity, GrowthMonitoringUILogEntity}
 import org.mongodb.scala.{Document, MongoClient}
 import org.mongodb.scala.model.Filters.{and, equal}
 import play.api.mvc._
@@ -11,6 +12,7 @@ import subscriber.{collectionTyrion, databaseTheWall, mongoDbHost}
 
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
+import scala.util.Try
 
 @Singleton
 class GrowthMonitoringController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
@@ -19,32 +21,37 @@ class GrowthMonitoringController @Inject()(val controllerComponents: ControllerC
     Ok(handleDelivery(request.body.asText.get))
   }
 
-  def report(awCode: String) = Action { implicit request: Request[AnyContent] =>
+  def report(awCode: String, date: String) = Action { implicit request: Request[AnyContent] =>
     case class GMR(seq: Seq[String])
+    val currentMonth = date.split("-")(1)
+    val currentYear = date.split("-")(2).takeRight(2)
     val results =
       Await.result(
         MongoClient(mongoDbHost)
           .getDatabase(databaseTheWall)
           .getCollection(collectionTyrion)
-          .find(and(equal("doctype", "log"), equal("aanganwadicode", awCode)))
+          .find(and(equal("doctype", "log"), equal("aanganwadicode", awCode), equal("month", currentMonth), equal("year", currentYear)))
           .toFuture(),
         Duration.Inf
-      ).map(_.toJson())
+      ).map(x => GrowthMonitoringUILogEntity.from(GrowthMonitoringLogEntity.fromJson(x.toJson())).toJson())
     Ok("[" + results.mkString(", ") + "]")
   }
 
-  def dashboard(sCode: String) = Action { implicit request: Request[AnyContent] =>
+  def dashboard(sCode: String, date: String) = Action { implicit request: Request[AnyContent] =>
+    Try{val currentMonth = date.split("-")(1)
+    val currentYear = date.split("-")(2).takeRight(2)
     val results: Document =
       Await.result(
         MongoClient(mongoDbHost)
           .getDatabase(databaseTheWall)
           .getCollection(collectionTyrion)
-          .find(and(equal("doctype", "dashboard"), equal("code", sCode)))
+          .find(and(equal("doctype", "dashboard"), equal("code", sCode), equal("currentmonth", currentMonth), equal("currentyear", currentYear)))
           .first()
           .toFuture(),
         Duration.Inf
       )
-    Ok(results.toJson())
+    Ok(results.toJson())}
+      .fold(_ => Ok(GrowthMonitoringDashboardEntity.defaultStringFor(date)(sCode)), x => x)
   }
 
   def handleDelivery(body: String): String = {

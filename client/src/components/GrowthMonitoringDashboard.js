@@ -21,27 +21,36 @@ class GrowthMonitoringDashbord extends Component {
         };
     }
 
-    handleChange = date => {
-        console.log("handle change called, ${date}", date)
-        this.setState({
-            selectedDate: date
-        });
-    };
+    componentDidUpdate(prevProps,prevState) {
+      if (this.state.selectedDate !== prevState.selectedDate) {
+           this.fetchData(this.state.selectedDate)
+      }
+    }
 
-    componentDidMount() {
-        axios.get(`/pcms/v1/growthmonitoring/dashboard/27`)
+    componentDidMount = () => {
+      this.fetchData(this.state.selectedDate)
+    }
+
+    fetchData = date => {
+        axios.get(`/pcms/v1/growthmonitoring/dashboard/27/${date.format("DD-MM-YYYY")}`)
             .then(({data}) => {
                 this.setState({
                     loaded: true,
                     data
                 })
-                console.log(data)
+            console.log(data.percentage)
             })
             .catch(err => {
 
             })
     }
 
+    handleChange = date => {
+        console.log("handle change called, ${date}", date)
+        this.setState({
+            selectedDate: date
+        });
+    };
 
     render() {
         const { suwcount,muwcount,normalcount,totalcount,malecount,femalecount,zerotoonecount,onetotwocount,

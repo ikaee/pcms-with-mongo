@@ -12,6 +12,7 @@ import {advaya_attendance, fetchAanganwadis, fetchAMRLog, fetchBeneficiaryImage}
 import {GMRTableColumns} from "./schema/GMRTableColumns";
 import DatePicker from "react-datepicker";
 import moment from "moment";
+import {imageGenartion} from "../utils/ImageUtil"
 
 class GMR extends Component {
 
@@ -32,21 +33,27 @@ class GMR extends Component {
             selectedDate: date
         });
     };
-    
-    componentDidMount = () => {
 
-        axios.get(`/pcms/v1/growthmonitoring/report/27511010507`)
-            .then(({data}) => {
-                this.setState({
-                    loaded: true,
-                    reportData : data
-                })
-                data.forEach(a => console.log(a))
-            })
-            .catch(err => {
-            })
+    componentDidUpdate(prevProps,prevState) {
+      if (this.state.selectedDate !== prevState.selectedDate) {
+           this.fetchData(this.state.selectedDate)
+      }
     }
 
+    componentDidMount = () => this.fetchData(this.state.selectedDate)
+
+    fetchData = date => {
+      axios.get(`/pcms/v1/growthmonitoring/report/27511010507/${date.format("DD-MM-YYYY")}`)
+           .then(({data}) => {
+
+               this.setState({
+                   loaded: true,
+                   reportData : data.map(a => imageGenartion(a))
+               })
+           })
+           .catch(err => {
+           })
+    }
 
 
     addImageLink = record => {

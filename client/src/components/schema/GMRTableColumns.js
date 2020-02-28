@@ -1,28 +1,28 @@
 export const GMRTableColumns = [
     {
-        Header: 'Code',
+        Header: 'Beneficiary Code',
         accessor: 'childcode'
     }, {
-        Header: 'FirstName',
-        accessor: 'name'
+        Header: 'First Name',
+        accessor: 'firstname'
     }, {
-        Header: 'Surname',
+        Header: 'Last Name',
         accessor: 'lastname'
     }, {
         Header: 'Gender',
         accessor: 'sex'
     }, {
-        Header: 'Dob',
+        Header: 'Date of Birth',
         accessor: 'dob'
     }, {
         Header: 'Log Date',
         accessor: 'logdate'
     }, {
-        Header: 'weight(kg)',
+        Header: 'Weight (Kgs)',
         accessor: 'weight'
     },
     {
-        Header: 'Height(cm)',
+        Header: 'Height (Cms)',
         accessor: 'height'
     },
     {
@@ -38,7 +38,7 @@ export const GMRTableColumns = [
         accessor: 'wasting'
     },
     {
-        Header: 'Underweight',
+        Header: 'WHO Underweight',
         accessor: 'whounderweight'
     }
 

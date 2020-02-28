@@ -17,7 +17,7 @@ class ProcessingEngine {
       dbName,
       collectionName)
 
-    val (record, document) = updateIfMonthIsNotSame(docDbConnector.getConsolidatedRecord(updateEntity.stateCode), updateEntity.currentMonth, updateEntity.currentYear)
+    val (record, document) = updateIfMonthIsNotSame(docDbConnector.getConsolidatedRecord(updateEntity.stateCode, updateEntity.currentMonth, updateEntity.currentYear), updateEntity.currentMonth, updateEntity.currentYear)
     val gradeEntity = record match {
       case None =>
         new GradeWiseConsolidationUtils().updateGradeWiseConsolidated(GradeWiseConsolidatedEntity("dashboard",

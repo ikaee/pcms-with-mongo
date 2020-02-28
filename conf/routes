@@ -7,8 +7,8 @@
 GET     /                                                           controllers.HomeController.index
 
 POST    /pcms/v1/growth-monitoring-entry                            controllers.GrowthMonitoringController.addLogRecord
-GET     /pcms/v1/growthmonitoring/report/:awCode                    controllers.GrowthMonitoringController.report(awCode)
-GET     /pcms/v1/growthmonitoring/dashboard/:stateCode              controllers.GrowthMonitoringController.dashboard(stateCode)
+GET     /pcms/v1/growthmonitoring/report/:awCode/:date                    controllers.GrowthMonitoringController.report(awCode, date)
+GET     /pcms/v1/growthmonitoring/dashboard/:stateCode/:date              controllers.GrowthMonitoringController.dashboard(stateCode, date)
 
 POST    /pcms/v1/attendance-entry                                   controllers.AttendanceController.addLogRecord
 GET     /pcms/v1/attendance/report/:awCode/:date                          controllers.AttendanceController.report(awCode, date)
