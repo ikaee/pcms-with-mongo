@@ -14,15 +14,12 @@ POST    /pcms/v1/attendance-entry                                   controllers.
 GET     /pcms/v1/attendance/report/:awCode/:date                          controllers.AttendanceController.report(awCode, date)
 GET     /pcms/v1/attendance/dashboard/:stateCode/:date                    controllers.AttendanceController.dashboard(stateCode, date)
 
-POST    /pcms/v1/hotcooked-entry                                    controllers.HotCookedController.addLogRecord
 GET     /pcms/v1/hotcooked/report/:awCode/:date                           controllers.HotCookedController.report(awCode, date)
 GET     /pcms/v1/hotcooked/dashboard/:stateCode/:date                     controllers.HotCookedController.dashboard(stateCode, date)
 
-POST    /pcms/v1/takehomeration-entry                               controllers.TakeHomeRationController.addLogRecord
 GET     /pcms/v1/takehomeration/report/:awCode/:date                      controllers.TakeHomeRationController.report(awCode, date)
 GET     /pcms/v1/takehomeration/dashboard/:stateCode/:date                controllers.TakeHomeRationController.dashboard(stateCode, date)
 
-POST    /pcms/v1/sewikaattendance-entry                             controllers.SewikaAttendanceController.addLogRecord
 GET     /pcms/v1/sewikaattendance/report/:awCode/:date                    controllers.SewikaAttendanceController.report(awCode, date)
 GET     /pcms/v1/takehomeration/dashboard/:stateCode/:date                controllers.SewikaAttendanceController.dashboard(stateCode, date)
 
