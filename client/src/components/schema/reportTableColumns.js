@@ -20,10 +20,6 @@ export const reportTableColumns = [
         accessor: 'datestamp'
     },
     {
-        Header: 'Time',
-        accessor: 'timestamp'
-    },
-    {
         Header: 'Lattitude',
         accessor: 'lattitude'
     },

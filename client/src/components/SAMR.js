@@ -106,31 +106,38 @@ class SAMR extends Component {
         let selectedOption = this.state.selectedOption;
         const value = selectedOption && selectedOption.value;
         return (
-            <section className="wrapper state-overview">
-                <Loader loaded={this.state.loaded} top="50%" left="55%">
-                    <div>
-                        <DatePicker
-                            selected={this.state.selectedDate}
-                            onChange={this.handleChange}
-                            dateFormat="DD-MM-YYYY"
-                            name = 'Select Date'
-                        />
-                    </div>
-                    <Select
-                        style={{width: "95%"}}
+            <section className="wrapper state-overview report">
+              <Loader loaded={this.state.loaded} top="50%" left="55%">
+                <div className="dashbord-top-panel">
+                  <div className="heading" >
+                    <label> Anganwadi </label>
+                    <div className="anganwadi-drop-down">
+                      <Select
                         value={value}
                         onChange={this.onHandleChange}
                         options={options}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="dashbord-calender">
+                    <span className="date-title"> Date:</span>
+                    <DatePicker
+                      selected={this.state.selectedDate}
+                      onChange={this.handleChange}
+                      dateFormat="DD-MM-YYYY"
                     />
-                    <ReactTable
-                        style={{width: "95%", marginTop: "2%"}}
-                        data={this.state.reportData}
-                        columns={reportTableColumns}
-                        filterable
-                        defaultPageSize={5}
-                        className="-striped -highlight"
-                    />
-                </Loader>
+                  </div>
+                </div>
+                <ReactTable
+
+                  data={this.state.reportData}
+                  columns={reportTableColumns}
+                  filterable
+                  defaultPageSize={5}
+                  className="-striped -highlight data-table"
+                />
+              </Loader>
             </section>
         )
     }

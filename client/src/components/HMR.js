@@ -14,7 +14,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import { imageGenartion } from "../utils/ImageUtil";
 
-class AMR extends Component {
+class HMR extends Component {
 
     constructor() {
         super();
@@ -105,29 +105,36 @@ class AMR extends Component {
         let selectedOption = this.state.selectedOption;
         const value = selectedOption && selectedOption.value;
         return (
-            <section className="wrapper state-overview">
+            <section className="wrapper state-overview report">
               <Loader loaded={this.state.loaded} top="50%" left="55%">
-                <div>
-                  <DatePicker
-                    selected={this.state.selectedDate}
-                    onChange={this.handleChange}
-                    dateFormat="DD-MM-YYYY"
-                    name = 'Select Date'
-                  />
+                <div className="dashbord-top-panel">
+                  <div className="heading" >
+                    <label> Anganwadi </label>
+                    <div className="anganwadi-drop-down">
+                      <Select
+                        value={value}
+                        onChange={this.onHandleChange}
+                        options={options}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="dashbord-calender">
+                    <span className="date-title"> Date:</span>
+                    <DatePicker
+                      selected={this.state.selectedDate}
+                      onChange={this.handleChange}
+                      dateFormat="DD-MM-YYYY"
+                    />
+                  </div>
                 </div>
-                <Select
-                  style={{width: "95%"}}
-                  value={value}
-                  onChange={this.onHandleChange}
-                  options={options}
-                />
                 <ReactTable
-                  style={{width: "95%", marginTop: "2%"}}
+
                   data={this.state.reportData}
                   columns={reportTableColumns}
                   filterable
                   defaultPageSize={5}
-                  className="-striped -highlight"
+                  className="-striped -highlight data-table"
                 />
               </Loader>
             </section>
@@ -135,4 +142,4 @@ class AMR extends Component {
     }
 }
 
-export default AMR;
+export default HMR;

@@ -166,6 +166,16 @@ a, a:hover, a:focus {
 }
 
 /* Top Panel BashBorad  */
+.report .dashbord-top-panel .heading {
+  display: flex;
+      align-items: center;
+  }
+  .report .dashbord-top-panel .heading .anganwadi-drop-down {
+    display: inline-block;
+    width: 200px;
+    margin-left: 10px;
+  }
+
 
 .dashbord-top-panel {
     max-width:100%;
