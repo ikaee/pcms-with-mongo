@@ -14,6 +14,7 @@ export default class NavMenu extends Component {
 
     render() {
         return (
+
             <aside>
               <div id="sidebar" className="nav-collapse ">
                 <ul className="sidebar-menu" id="nav-accordion">
@@ -24,9 +25,9 @@ export default class NavMenu extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link className={this.activeClass(6)} onClick={() => this.activeKey(6)} to={"/gm"}>
+                    <Link className={this.activeClass(5)} onClick={() => this.activeKey(5)} to={"/gm"}>
                       <i className="fa fa-line-chart"></i>
-                      <span>GrothMonitoring</span>
+                      <span>Growth Monitoring</span>
                     </Link>
                   </li>
 

@@ -37,7 +37,7 @@ class AttendanceDashboard extends Component {
                     loaded: true,
                     data
                 })
-            console.log(data.percentage)
+
             })
             .catch(err => {
 
@@ -59,11 +59,11 @@ class AttendanceDashboard extends Component {
             septembercount, octobercount, novembercount, decembercount, currentdate
         } = this.state.data;
 
-        const metrics_data = {
-            percentage: percentage,
-            presentcount: presentcount,
-            totalcount: totalcount
-        };
+        const metrics_data = [
+          {label:"Total Beneficiaries", totalcount: totalcount},
+          {label:"Present", presentcount: presentcount},
+          {label:"Percentage of Beneficiaries Present", percentage: percentage},
+        ];
         const gender_data = [
             {value: malecount, color: "#6ccac9"},
             {value: femalecount, color: "#ff6c60"}
@@ -95,7 +95,7 @@ class AttendanceDashboard extends Component {
               <Loader loaded={this.state.loaded} top="50%" left="55%">
                 <div className="dashbord-top-panel">
                   <div className="heading" >
-                    <label> Attendance Dashboard</label>
+                    <label> Attendance </label>
                   </div>
                   <div className="detail-report-link">
                     <Link to={"/amr"}>
@@ -114,13 +114,13 @@ class AttendanceDashboard extends Component {
                 <div className="row">
                   <div className="col-lg-10 col-sm-6" style={{backgroundColor: "white", width: "850px", borderRadius: '7px'}}>
                     <MetricsDashboard data={metrics_data}/>
-                    <MonthWise title='Monthly Distributed' data={month_data}/>
+                    <MonthWise title='Month Wise Attendance Status' statedata={month_data}/>
                   </div>
                   <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", marginBottom: "2%", backgroundColor: "white", height: "235px", borderRadius:'7px'}}>
-                    <GenderWise title='Gender Wise' data={gender_data}/>
+                    <GenderWise title='Gender Wise Attedance Status' data={gender_data}/>
                   </div>
                   <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", backgroundColor: "white", borderRadius: '7px'}}>
-                    <AgeWise title="Age wise" data={age_data}/>
+                    <AgeWise title="Age Wise Attendance Status" data={age_data}/>
                   </div>
                 </div>
               </Loader>

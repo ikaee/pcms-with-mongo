@@ -49,11 +49,11 @@ class SewikaAttendance extends Component {
             septembercount, octobercount, novembercount, decembercount, currentdate
         } = this.state.data;
 
-        const metrics_data = {
-            percentage: percentage,
-            presentcount: presentcount,
-            totalcount: totalcount
-        };
+         const metrics_data = [
+            {label:"Total Sewikas", totalcount: totalcount},
+            {label:"Total Packets Distributed", presentcount: presentcount},
+            {label:"Percentage of Sewikas Present", percentage: percentage},
+         ];
         const gender_data = [
             {value: malecount, color: "#6ccac9"},
             {value: femalecount, color: "#ff6c60"}
@@ -85,7 +85,7 @@ class SewikaAttendance extends Component {
               <Loader loaded={this.state.loaded} top="50%" left="55%">
                 <div className="dashbord-top-panel">
                   <div className="heading" >
-                    <label> Sewika Attendance Dashboard </label>
+                    <label> Sewika Attendace </label>
                   </div>
                   <div className="detail-report-link">
                     <Link to={"/samr"}>
@@ -104,13 +104,13 @@ class SewikaAttendance extends Component {
                 <div className="row">
                   <div className="col-lg-10 col-sm-6" style={{backgroundColor: "white", width: "850px", borderRadius: '7px'}}>
                     <MetricsDashboard data={metrics_data}/>
-                    <MonthWise title='Monthly Distributed' data={month_data}/>
+                    <MonthWise title='Month Wise Attendance Status' data={month_data}/>
                   </div>
                   <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", marginBottom: "2%", backgroundColor: "white", height: "235px", borderRadius:'7px'}}>
-                    <GenderWise title='Gender Wise' data={gender_data}/>
+                    <GenderWise title='Gender Wise Attendance Status' data={gender_data}/>
                   </div>
                   <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", backgroundColor: "white", borderRadius: '7px'}}>
-                    <AgeWise title="Age wise" data={age_data}/>
+                    <AgeWise title="Age Wise Attendance Status" data={age_data}/>
                   </div>
                 </div>
               </Loader>

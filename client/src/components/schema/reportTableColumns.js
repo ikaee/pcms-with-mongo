@@ -1,21 +1,22 @@
+ // First Name, Last Name, Gender, Date of Birth, Log Date, Lattitude, Longitude, Image
 export const reportTableColumns = [
     {
-        Header: 'Code',
+        Header: 'Beneficiary Code',
         accessor: 'studentcode'
     }, {
-        Header: 'FirstName',
+        Header: 'First Name',
         accessor: 'firstname'
     }, {
-        Header: 'Surname',
+        Header: 'Last Name',
         accessor: 'lastname'
     }, {
         Header: 'Gender',
         accessor: 'sex'
     }, {
-        Header: 'Dob',
+        Header: 'Date of Birth',
         accessor: 'dob'
     }, {
-        Header: 'Date',
+        Header: 'Log Date',
         accessor: 'datestamp'
     },
     {
@@ -29,8 +30,9 @@ export const reportTableColumns = [
     {
         Header: 'Longitude',
         accessor: 'longitude'
-    }, {
-              Header: 'Image',
-              accessor: 'image'
-          }
+    },
+    {
+        Header: 'Image',
+        accessor: 'image'
+    }
     ]

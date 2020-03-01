@@ -2,6 +2,7 @@ import React from 'react';
 
 const MetricsDashboard = ({data: {totalcount = 0, suw = 0, muw = 0, normal = 0}}) => (
     <div>
+
       <div className="state-overview metrics-state-overview-blocks">
         <div className="state-overview-block" >
           <section className="panel">
@@ -14,7 +15,7 @@ const MetricsDashboard = ({data: {totalcount = 0, suw = 0, muw = 0, normal = 0}}
               </div>
             </div>
             <div className="state-title">
-              Wighted
+              Total Weighed
             </div>
           </section>
         </div>
@@ -28,7 +29,7 @@ const MetricsDashboard = ({data: {totalcount = 0, suw = 0, muw = 0, normal = 0}}
               </div>
             </div>
             <div className="state-title">
-              Severly Malnourished
+              Severly Malnourished (SUW)
             </div>
           </section>
         </div>
@@ -45,7 +46,7 @@ const MetricsDashboard = ({data: {totalcount = 0, suw = 0, muw = 0, normal = 0}}
             </div>
 
             <div className="state-title">
-              Moderately malnourishment
+              Moderately Malnourished (MUW)
             </div>
           </section>
         </div>

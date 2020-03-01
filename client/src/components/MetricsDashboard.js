@@ -1,6 +1,13 @@
 import React from 'react';
 
-const MetricsDashboard = ({data: {totalcount = 0, presentcount = 0, percentage = 0}}) => (
+
+const MetricsDashboard = (
+  statedata = [
+  {label:"Total ", totalcount: 0},
+  {label:"Present", presentcount: 0},
+  {label:"Percentage ", percentage: 0}]) =>{
+
+     return (
     <div>
       <div className="state-overview metrics-state-overview-blocks">
         <div className="state-overview-block" >
@@ -8,13 +15,13 @@ const MetricsDashboard = ({data: {totalcount = 0, presentcount = 0, percentage =
             <div className="symbol terques">
               <div className="value">
                 <h1 className="count">
-                  {presentcount}
+                  {statedata.data[0].totalcount}
                 </h1>
 
               </div>
             </div>
             <div className="state-title">
-              Total Beneficiaries
+              {statedata.data[0].label}
             </div>
           </section>
         </div>
@@ -23,12 +30,12 @@ const MetricsDashboard = ({data: {totalcount = 0, presentcount = 0, percentage =
             <div className="symbol red">
               <div className="value">
                 <h1 className=" count2">
-                  {totalcount}
+                  {statedata.data[1].presentcount}
                 </h1>
               </div>
             </div>
             <div className="state-title">
-              Total Meal Distributed
+              {statedata.data[1].label}
             </div>
           </section>
         </div>
@@ -37,7 +44,7 @@ const MetricsDashboard = ({data: {totalcount = 0, presentcount = 0, percentage =
             <div className="symbol yellow">
               <div className="value">
                 <h1 className=" count3">
-                  {percentage}%
+                  {statedata.data[2].percentage}%
                 </h1>
 
               </div>
@@ -45,12 +52,13 @@ const MetricsDashboard = ({data: {totalcount = 0, presentcount = 0, percentage =
             </div>
 
             <div className="state-title">
-              Percentage of Beneficiaries recevied meal
+              {statedata.data[2].label}
             </div>
           </section>
         </div>
 
       </div>
-    </div>);
+    </div>)
+  };
 
 export default MetricsDashboard;

@@ -96,7 +96,7 @@ class GrowthMonitoringDashbord extends Component {
               <Loader loaded={this.state.loaded} top="50%" left="55%">
                 <div className="dashbord-top-panel">
                   <div className="heading" >
-                    <label> GrothMonitoring Dashboard</label>
+                    <label> Growth Monitoring </label>
                   </div>
                   <div className="detail-report-link">
                     <Link to={"/gmr"}>
@@ -115,13 +115,13 @@ class GrowthMonitoringDashbord extends Component {
                 <div className="row">
                   <div className="col-lg-10 col-sm-6" style={{backgroundColor: "white", width: "850px", borderRadius: '7px'}}>
                     <GrowthMontoringMetricsDashboard data={metrics_data}/>
-                    <MonthWise title='Monthly Distributed' data={month_data}/>
+                    <MonthWise title='Monthly Distributed Nourishment Status' data={month_data}/>
                   </div>
                   <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", marginBottom: "2%", backgroundColor: "white", height: "235px", borderRadius:'7px'}}>
-                    <GenderWise title='Gender Wise' data={gender_data}/>
+                    <GenderWise title='Gender Wise Nourishment Status' data={gender_data}/>
                   </div>
                   <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", backgroundColor: "white", borderRadius: '7px'}}>
-                    <AgeWise title="Age wise" data={age_data}/>
+                    <AgeWise title="Age wise Nourishment Status" data={age_data}/>
                   </div>
                 </div>
               </Loader>

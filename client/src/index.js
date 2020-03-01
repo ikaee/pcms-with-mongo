@@ -6,7 +6,9 @@ import './stylesheets/bootstrap-reset.css';
 import './stylesheets/slidebars.css';
 import './stylesheets/style.css';
 import './stylesheets/style-responsive.css';
+import './stylesheets/table-responsive.css';
 import Main from "./components/Main";
+
 
 
 ReactDOM.render(<Main />, document.getElementById('root'));
