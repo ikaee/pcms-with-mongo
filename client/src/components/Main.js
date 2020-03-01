@@ -22,7 +22,7 @@ export default () =>
       <section id="container">
         <DocumentTitle title="PCMS"/>
         <Favicon url={faviconImage}/>
-        <Header title={"ICDS"} date={"February 2020"} />
+        <Header title={"PCMS"} />
         <NavMenu/>
         <section id={"main-content"} style1={{marginLeft: 0}}>
           <Route exact path="/" component={AttendanceDashboard}/>

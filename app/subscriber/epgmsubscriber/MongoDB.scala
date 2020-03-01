@@ -8,6 +8,7 @@ import org.mongodb.scala.MongoClient
 import org.mongodb.scala.bson.collection.Document
 import org.mongodb.scala.model.Filters._
 import org.mongodb.scala.model.Sorts._
+import service.EmailService
 import subscriber._
 import subscriber.aggregation.dataobjects.UpdateEntity
 import subscriber.aggregation.engine.ProcessingEngine
@@ -68,6 +69,7 @@ object MongoDB {
         .toFuture(),
       Duration.Inf
     )
+    if (childRecord.whounderweight.equals("2")) EmailService.send(childRecord)
   }
 
   private def getAgeInMonths(year: Int, month: Int, day: Int): Long = {
