@@ -113,15 +113,22 @@ class GrowthMonitoringDashbord extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-lg-10 col-sm-6" style={{backgroundColor: "white", width: "850px", borderRadius: '7px'}}>
-                    <GrowthMontoringMetricsDashboard data={metrics_data}/>
-                    <MonthWise title='Monthly Distributed Nourishment Status' data={month_data}/>
+                  <div className="col-lg-8 col-md-12 col-sm-12" >
+                    <div className="bar-chart-wrapper">
+                      <GrowthMontoringMetricsDashboard data={metrics_data}/>
+                      <MonthWise title='Monthly Distributed Nourishment Status' data={month_data}/>
+
+                    </div>
                   </div>
-                  <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", marginBottom: "2%", backgroundColor: "white", height: "235px", borderRadius:'7px'}}>
-                    <GenderWise title='Gender Wise Nourishment Status' data={gender_data}/>
+                  <div className="col-lg-4 col-md-6 col-sm-12">
+                    <div className="graph-chart-wrapper">
+                      <GenderWise title='Gender Wise Nourishment Status' data={gender_data}/>
+                    </div>
                   </div>
-                  <div className="col-lg-3 col-sm-6" style={{marginLeft: "2%", backgroundColor: "white", borderRadius: '7px'}}>
-                    <AgeWise title="Age wise Nourishment Status" data={age_data}/>
+                  <div className="col-lg-4 col-md-6 col-sm-12">
+                    <div className="graph-chart-wrapper">
+                      <AgeWise title="Age wise Nourishment Status" data={age_data}/>
+                    </div>
                   </div>
                 </div>
               </Loader>

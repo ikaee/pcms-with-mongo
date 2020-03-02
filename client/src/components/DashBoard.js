@@ -69,17 +69,17 @@ class Dashboard extends Component {
 
             <section className="wrapper">
 
-                <Loader loaded={this.state.loaded} top="50%" left="55%">
-                    <div style={{height: '20px',  fontSize: '20px', paddingBottom: '30px'}}>
-                        <label > {this.state.selectedOption.label} Dashboard</label>
-                    </div>
-                    <div>
-                        <MetricsDashboard {...attendance_data}/>
-                        <MonthWise title='Month wise' data={month_data}/>
-                        <GenderWise title='Gender Wise' data={gender_data}/>
-                        <AgeWise title={"Age wise"} data={age_data}/>
-                    </div>
-                </Loader>
+              <Loader loaded={this.state.loaded} top="50%" left="55%">
+                <div style={{height: '20px',  fontSize: '20px', paddingBottom: '30px'}}>
+                  <label > {this.state.selectedOption.label} Dashboard</label>
+                </div>
+                <div>
+                  <MetricsDashboard {...attendance_data}/>
+                  <MonthWise title='Month wise' data={month_data}/>
+                  <GenderWise title='Gender Wise' data={gender_data}/>
+                  <AgeWise title={"Age wise"} data={age_data}/>
+                </div>
+              </Loader>
             </section>
         )
     }

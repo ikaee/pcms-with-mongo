@@ -42,9 +42,9 @@ const AgeWise = ({
                          {name: '5-6Y', value: 0}
                      ]
                  }) => (
-    <div>
-      <GraphTitle title={title}/>
-      <PieChart width={300} height={240}>
+    <div className="graph">
+      <div><GraphTitle title={title}/></div>
+      <PieChart width={300} height={310}>
         <Legend dataKey={"name"}/>
         <Pie
           data={data}
