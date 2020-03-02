@@ -19,7 +19,7 @@ body {
     text-rendering:optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
-    
+
 }
 
 ul li {
@@ -191,11 +191,7 @@ a, a:hover, a:focus {
 }
 
 
-.graph-chart-wrapper canvas{
-  height: auto !important;
-  max-height:100%;
-  width:100% !important;
-}
+
 /* Top Panel BashBorad  */
 .report .dashbord-top-panel .heading {
   display: flex;
