@@ -17,26 +17,57 @@ import MealDashBorad from "./MealDashBorad";
 import THRDashBorad from "./THRDashBorad";
 import SewikaAttendance from "./SewikaAttancdance";
 
-export default () =>
-    <Router>
-      <section id="container">
-        <DocumentTitle title="PCMS"/>
-        <Favicon url={faviconImage}/>
-        <Header title={"PCMS"} />
-        <NavMenu/>
-        <section id={"main-content"} style1={{marginLeft: 0}}>
-          <Route exact path="/" component={AttendanceDashboard}/>
-          <Route path="/gm" component={GrowthMonitoringDashboard}/>
-          <Route path="/hm" component={MealDashBorad}/>
-          <Route path="/th" component={THRDashBorad}/>
-          <Route path="/thr" component={THR} />
-          <Route path="/amr" component={AMR}/>
-          <Route path="/gmr" component={GMR}/>
-          <Route path="/hmr" component={HMR}/>
-          <Route path = "/samr" component={SAMR} />
-          <Route path="/sa" component ={SewikaAttendance} />
-          <Route path="/hot-cooked" component={HotCooked}/>
+
+class Main extends React.Component {
+
+  constructor() {
+      super();
+      this.state = {
+          isNavMenuHide: false
+      }
+  }
+
+  onClickHandler =  () =>  {
+    if(this.state.isNavMenuHide !== true) {
+      this.setState({
+        isNavMenuHide: true
+      })
+    } else {
+      this.setState({
+        isNavMenuHide: false
+      })
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    return this.state.isNavMenuHide !== nextState.isNavMenuHide
+  }
+
+  render() {
+      return (<Router>
+        <section id="container">
+          <DocumentTitle title="PCMS"/>
+          <Favicon url={faviconImage}/>
+          <Header title={"PCMS"} onClickHandler = {this.onClickHandler}/>
+          <NavMenu visibility={this.state.isNavMenuHide}/>
+          <section id={"main-content"} style1={{marginLeft: 0}}>
+            <Route exact path="/" component={AttendanceDashboard}/>
+            <Route path="/gm" component={GrowthMonitoringDashboard}/>
+            <Route path="/hm" component={MealDashBorad}/>
+            <Route path="/th" component={THRDashBorad}/>
+            <Route path="/thr" component={THR} />
+            <Route path="/amr" component={AMR}/>
+            <Route path="/gmr" component={GMR}/>
+            <Route path="/hmr" component={HMR}/>
+            <Route path = "/samr" component={SAMR} />
+            <Route path="/sa" component ={SewikaAttendance} />
+            <Route path="/hot-cooked" component={HotCooked}/>
+          </section>
+          {/*<Footer />*/}
         </section>
-        {/*<Footer />*/}
-      </section>
-    </Router>
+      </Router>);
+  }
+
+}
+
+export default Main;

@@ -21,6 +21,11 @@ body {
     -moz-font-smoothing: antialiased;
 
 }
+.close-sidebar {
+  overflow: hidden;
+  outline: none;
+  margin-left: -210px;
+}
 
 ul li {
     list-style: none;
@@ -244,6 +249,7 @@ a, a:hover, a:focus {
     position: fixed;
     background: #2a3542;
     overflow-y: scroll;
+    z-index: 99;
 }
 
 #sidebar ul li {
@@ -786,6 +792,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     float: left;
     padding-right: 15px;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .sidebar-toggle-box .fa-bars {

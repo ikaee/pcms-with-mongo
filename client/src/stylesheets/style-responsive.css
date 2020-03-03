@@ -135,9 +135,9 @@
       padding-left:0;
       padding-right:0;
     }
-    #sidebar {
+    /* #sidebar {
         display: none;
-    }
+    } */
 
     .sidebar-close #sidebar {
         height: auto;
@@ -198,9 +198,9 @@
 
 
     /* sidebar */
-    #sidebar {
+    /* #sidebar {
         margin: 0px !important;
-    }
+    } */
 
     /* sidebar collabler */
     #sidebar .btn-navbar.collapsed .arrow {

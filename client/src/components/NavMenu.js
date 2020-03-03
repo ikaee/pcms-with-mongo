@@ -2,21 +2,23 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
 export default class NavMenu extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            linkKey: 1
+            linkKey: 1,
         }
     }
 
     activeClass = key => this.state.linkKey === key ? "active" : ""
     activeKey = linkKey => this.setState({linkKey});
-
+    setVisiblity = () =>{
+      return this.props.visibility === true ? "nav-collapse ":"nav-collapse close-sidebar"
+    }
     render() {
         return (
 
             <aside>
-              <div id="sidebar" className="nav-collapse ">
+              <div id="sidebar" className={this.setVisiblity()}>
                 <ul className="sidebar-menu" id="nav-accordion">
                   <li>
                     <Link className={this.activeClass(1)} onClick={() => this.activeKey(1)} to={"/"}>
