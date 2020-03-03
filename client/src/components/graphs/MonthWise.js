@@ -22,7 +22,7 @@ const MonthWise = ({
 
     <div className="graph-table">
       <GraphTitle title={title}/>
-      <BarChart width={800} height={500} data={data}>
+      <BarChart width={900} height={500} data={data}>
         <XAxis dataKey="name"/>
         <YAxis/>
         <CartesianGrid strokeDasharray="3 3"/>

@@ -10,7 +10,7 @@ Website: http://thevectorlab.net/
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 
 body {
-    color: #797979;
+    color: #000000;
     background: #f1f2f7;
     font-family: 'Open Sans', sans-serif;
     padding: 0px !important;
@@ -177,6 +177,9 @@ a, a:hover, a:focus {
   border-radius: 7px;
   margin:10px;
   overflow: hidden;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
 }
 
 .graph-chart-wrapper {
@@ -186,7 +189,9 @@ a, a:hover, a:focus {
   display: flex;
   justify-content: center;
   align-content: center;
-
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
 }
 .graph-chart-wrapper  label {
   margin: 10px;
@@ -200,15 +205,19 @@ a, a:hover, a:focus {
 /* Top Panel BashBorad  */
 .report .dashbord-top-panel .heading {
   display: flex;
-      align-items: center;
+  align-items: center;
   }
   .report .dashbord-top-panel .heading .anganwadi-drop-down {
     display: inline-block;
     width: 200px;
     margin-left: 10px;
+    font-size: 16px;
+    line-height: 20px;
   }
 
-
+.rechart-wrapper {
+      margin: 0 auto;
+}
 .dashbord-top-panel {
     max-width:100%;
     width:100%;
@@ -222,14 +231,17 @@ a, a:hover, a:focus {
 }
 
 .dashbord-top-panel .heading {
-  line-height: 24px;
-  font-size: 20px;
+  line-height: 40px;
+  font-size: 36px;
 }
 
 .dashbord-top-panel .detail-report-link {
   font-size: 14px;
   line-height: 20px;
   font-weight: bold;
+  a {
+        color: #59ace2;
+  }
 }
 .dashbord-top-panel .dashbord-calender {
 
@@ -822,7 +834,8 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     line-height: 22px;
     font-weight: 700;
     margin: 0 0 14px 66px;
-
+    display: block;
+    text-align: center;
   }
 
 /* Matrics overview state blocks */
