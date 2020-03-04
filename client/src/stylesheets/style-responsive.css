@@ -153,6 +153,7 @@
     /* body container */
     #main-content {
         margin: 0px!important;
+        margin-bottom: 50px !important;
         position: none !important;
     }
 

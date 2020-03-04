@@ -9,7 +9,6 @@ import 'react-select/dist/react-select.css';
 import Loader from "react-loader";
 import axios from 'axios';
 import moment from "moment";
-import {Router} from "react-router";
 import {Link} from "react-router-dom";
 
 class THRDashBorad extends Component {
@@ -23,7 +22,7 @@ class THRDashBorad extends Component {
     }
 
     handleChange = date => {
-        console.log("handle change called, ${date}", date)
+        // console.log("handle change called, ${date}", date)
         this.setState({
             selectedDate: date
         });
@@ -46,7 +45,6 @@ class THRDashBorad extends Component {
                     loaded: true,
                     data
                 })
-            console.log(data.percentage)
             })
             .catch(err => {
 

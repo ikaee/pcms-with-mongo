@@ -11,14 +11,11 @@ export default class NavMenu extends Component {
 
     activeClass = key => this.state.linkKey === key ? "active" : ""
     activeKey = linkKey => this.setState({linkKey});
-    setVisiblity = () =>{
-      return this.props.visibility === true ? "nav-collapse ":"nav-collapse close-sidebar"
-    }
     render() {
         return (
 
             <aside>
-              <div id="sidebar" className={this.setVisiblity()}>
+              <div id="sidebar" className="nav-collapse">
                 <ul className="sidebar-menu" id="nav-accordion">
                   <li>
                     <Link className={this.activeClass(1)} onClick={() => this.activeKey(1)} to={"/"}>

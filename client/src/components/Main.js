@@ -22,34 +22,24 @@ class Main extends React.Component {
 
   constructor() {
       super();
-      this.state = {
-          isNavMenuHide: false
-      }
+      this.container = React.createRef();
   }
 
   onClickHandler =  () =>  {
-    if(this.state.isNavMenuHide !== true) {
-      this.setState({
-        isNavMenuHide: true
-      })
-    } else {
-      this.setState({
-        isNavMenuHide: false
-      })
-    }
+    this.container.current.classList.toggle("sidebar-closed")
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    return this.state.isNavMenuHide !== nextState.isNavMenuHide
+    return this.state.sidebarVisibilty !== nextState.sidebarVisibilty
   }
 
   render() {
       return (<Router>
-        <section id="container">
+        <section id="container" ref={this.container}>
           <DocumentTitle title="PCMS"/>
           <Favicon url={faviconImage}/>
           <Header title={"PCMS"} onClickHandler = {this.onClickHandler}/>
-          <NavMenu visibility={this.state.isNavMenuHide}/>
+          <NavMenu />
           <section id={"main-content"} style1={{marginLeft: 0}}>
             <Route exact path="/" component={AttendanceDashboard}/>
             <Route path="/gm" component={GrowthMonitoringDashboard}/>

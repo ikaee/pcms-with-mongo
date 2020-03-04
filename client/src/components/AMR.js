@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import axios from 'axios';
-import {css, StyleSheet} from "aphrodite";
 import ReactTable from 'react-table'
 import "react-table/react-table.css";
 import {Option} from "../utils/Option";
@@ -68,7 +67,7 @@ class AMR extends Component {
         this.setState({loaded: false});
         const MIME = "data:image/jpeg;base64,";
         fetchBeneficiaryImage(`${advaya_attendance}/${record.imageuri}`).then(res => {
-            const image = <img src={MIME + res.data} style={{"height": "40px", "width": "40px"}}/>;
+            const image = <img src={MIME + res.data} alt="test" style={{"height": "40px", "width": "40px"}}/>;
             const newRecord = Object.assign({}, record, {"image": image})
 
             this.setState(prevState => ({

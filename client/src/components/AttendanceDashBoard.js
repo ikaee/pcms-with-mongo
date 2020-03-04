@@ -8,7 +8,6 @@ import 'react-select/dist/react-select.css';
 import Loader from "react-loader";
 import axios from 'axios';
 import moment from "moment";
-import {Router} from "react-router";
 import {Link} from "react-router-dom";
 
 class AttendanceDashboard extends Component {
@@ -45,7 +44,7 @@ class AttendanceDashboard extends Component {
     }
 
     handleChange = date => {
-        console.log("handle change called, ${date}", date)
+        // console.log("handle change called, ${date}", date)
         this.setState({
             selectedDate: date
         });

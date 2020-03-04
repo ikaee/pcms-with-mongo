@@ -239,9 +239,10 @@ a, a:hover, a:focus {
   font-size: 14px;
   line-height: 20px;
   font-weight: bold;
-  a {
-        color: #59ace2;
-  }
+
+}
+.dashbord-top-panel .detail-report-link a {
+  color: #59ace2;
 }
 .dashbord-top-panel .dashbord-calender {
 
@@ -262,6 +263,7 @@ a, a:hover, a:focus {
     background: #2a3542;
     overflow-y: scroll;
     z-index: 99;
+    transition:margin .3s;
 }
 
 #sidebar ul li {
@@ -420,6 +422,9 @@ ul.sidebar-menu li a.active i {
 
 #main-content {
     margin-left: 210px;
+    transition: margin-left .3s;
+    margin-bottom: 50px;
+    /* display: flex; */
 }
 
 .header, .footer {
@@ -805,6 +810,10 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     padding-right: 15px;
     margin-top: 20px;
     cursor: pointer;
+    transition: color .3s;
+}
+.sidebar-toggle-box:hover{
+  color: #5eb2ff;
 }
 
 .sidebar-toggle-box .fa-bars {
