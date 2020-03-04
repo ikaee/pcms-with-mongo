@@ -37,7 +37,6 @@ class GrowthMonitoringDashbord extends Component {
                     loaded: true,
                     data
                 })
-            console.log(data.percentage)
             })
             .catch(err => {
 

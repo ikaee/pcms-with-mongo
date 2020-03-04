@@ -404,6 +404,10 @@
 
 @media (max-width: 480px) {
 
+    .dashbord-top-panel .heading {
+      font-size: 20px;
+      line-height: 32px;
+    }
     .navbar-collapse, .navbar-collapse.in, .mega-menu ul li a {
         width: 100%;
     }
