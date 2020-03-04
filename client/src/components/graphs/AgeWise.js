@@ -47,8 +47,9 @@ const AgeWise = ({
       <PieChart width={300} height={310}>
         <Legend dataKey={"name"}/>
         <Pie
-          dataKey={"name"}
+
           data={data}
+          dataKey="value"
           cx={130}
           cy={95}
           labelLine={false}
