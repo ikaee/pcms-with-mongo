@@ -49,7 +49,7 @@ class SewikaAttendance extends Component {
 
          const metrics_data = [
             {label:"Total Sewikas", totalcount: totalcount},
-            {label:"Total Packets Distributed", presentcount: presentcount},
+            {label:"Present", presentcount: presentcount},
             {label:"Percentage of Sewikas Present", percentage: percentage},
          ];
         const gender_data = [
@@ -100,22 +100,22 @@ class SewikaAttendance extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-lg-8 col-md-12 col-sm-12" >
+                  <div className="col-lg-12 col-md-12 col-sm-12" >
                     <div className="bar-chart-wrapper">
                       <MetricsDashboard data={metrics_data}/>
                       <MonthWise title='Month Wise Attendance Status' data={month_data}/>
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-6 col-sm-12" >
+                  {/* <div className="col-lg-4 col-md-6 col-sm-12" >
                     <div className="graph-chart-wrapper">
                       <GenderWise title='Gender Wise Attendance Status' data={gender_data}/>
                     </div>
-                  </div>
-                  <div className="col-lg-4 col-md-6 col-sm-12" >
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-12" >
                     <div className="graph-chart-wrapper">
                       <AgeWise title="Age Wise Attendance Status" data={age_data}/>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </Loader>
             </section>

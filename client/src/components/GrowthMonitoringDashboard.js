@@ -111,23 +111,23 @@ class GrowthMonitoringDashbord extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-lg-8 col-md-12 col-sm-12" >
+                  <div className="col-lg-12 col-md-12 col-sm-12" >
                     <div className="bar-chart-wrapper">
                       <GrowthMontoringMetricsDashboard data={metrics_data}/>
                       <MonthWise title='Monthly Distributed Nourishment Status' data={month_data}/>
 
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-6 col-sm-12">
+                  {/* <div className="col-lg-4 col-md-6 col-sm-12">
                     <div className="graph-chart-wrapper">
                       <GenderWise title='Gender Wise Nourishment Status' data={gender_data}/>
                     </div>
-                  </div>
-                  <div className="col-lg-4 col-md-6 col-sm-12">
+                    </div>
+                    <div className="col-lg-4 col-md-6 col-sm-12">
                     <div className="graph-chart-wrapper">
                       <AgeWise title="Age wise Nourishment Status" data={age_data}/>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </Loader>
             </section>

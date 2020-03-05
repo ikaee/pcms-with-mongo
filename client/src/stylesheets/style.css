@@ -181,7 +181,9 @@ a, a:hover, a:focus {
   border-style: solid;
   border-width: 2px;
 }
-
+.bar-chart-wrapper .recharts-wrapper{
+  margin: 0 auto;
+}
 .graph-chart-wrapper {
   background-color: white;
   border-radius: 7px;
