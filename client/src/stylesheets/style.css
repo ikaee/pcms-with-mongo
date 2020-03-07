@@ -179,7 +179,7 @@ a, a:hover, a:focus {
   overflow: hidden;
   border-color: black;
   border-style: solid;
-  border-width: 2px;
+  border-width: thin;
 }
 .bar-chart-wrapper .recharts-wrapper{
   margin: 0 auto;
@@ -193,7 +193,7 @@ a, a:hover, a:focus {
   align-content: center;
   border-color: black;
   border-style: solid;
-  border-width: 2px;
+  border-width: thin;
 }
 .graph-chart-wrapper  label {
   margin: 10px;
