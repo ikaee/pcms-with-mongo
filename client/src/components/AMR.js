@@ -20,7 +20,7 @@ class AMR extends Component {
             selectedDate: moment(),
             selectedOption: '',
             options: [
-              {label: "vishnupura 6", code: "27511010507"},
+              {label: "VISHNUPURI 6", code: "27511150606"},
             ],
             reportData: [],
             loaded: false

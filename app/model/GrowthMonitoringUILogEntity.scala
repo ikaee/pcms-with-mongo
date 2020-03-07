@@ -43,8 +43,8 @@ case class GrowthMonitoringUILogEntity(
    }
 
    private def gender(sex: String) =
-     if (sex.equals("M")) "Male"
-     else "Female"
+     if (sex.equals("M")) "MALE"
+     else "FEMALE"
 
    private def whoUwGrade(whounderweight: String) =
      if (whounderweight.equals("0")) "NOR"
