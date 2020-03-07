@@ -21,90 +21,91 @@ class AMR extends Component {
         this.state = {
             selectedDate: moment(),
             selectedOption: '',
-            options: ['27511010507','27511010508'],
+            options: [
+                {label: "vishnupura 6", code: "27511010507"},
+            ],
             reportData: [],
             loaded: false
         }
     }
-    fetchData = date => {
-      axios.get(`/pcms/v1/takehomeration/report/27511010507/${date.format("DD-MM-YYYY")}`)
-           .then(({data}) => {
 
-               this.setState({
-                   loaded: true,
-                   reportData : data.map(a => imageGenartion(a))
-               })
-           })
-           .catch(err => {
-           })
+    fetchData = (selectedOption,date) => {
+      if(selectedOption !== null && selectedOption !== '') {
+        axios.get(`/pcms/v1/takehomeration/report/${selectedOption.code}/${date.format("DD-MM-YYYY")}`)
+            .then(({data}) => {
+                this.setState({
+                    loaded: true,
+                    reportData : data.map(a => imageGenartion(a))
+                  })
+                })
+                .catch(err => {
+                  console.log("something went wrong!!!");
+                })
+      } else {
+        this.setState({selectedOption: '', reportData: [], loaded: true});
+      }
     }
 
     componentDidUpdate(prevProps,prevState) {
-      if (this.state.selectedDate !== prevState.selectedDate) {
-           this.fetchData(this.state.selectedDate)
+      if (this.state.selectedDate !== prevState.selectedDate ||  this.state.selectedOption !== prevState.selectedOption ) {
+        const {selectedDate,selectedOption} = this.state
+          this.fetchData(selectedOption,selectedDate )
       }
     }
 
     componentDidMount = () => {
-      this.fetchData(this.state.selectedDate)
+      const {selectedDate,selectedOption} = this.state
+        this.fetchData(selectedOption,selectedDate )
     }
 
-    handleChange = date => {
-
-        this.setState({
-            selectedDate: date
-        });
+    handleAnganwadiCodeChange = selectedOption => {
+          Option(selectedOption).fold(
+              _ => this.setState({selectedOption: '', reportData: [], loaded: true}),
+              _ => {
+                      this.setState({
+                          selectedOption,
+                          loaded: true
+                      })
+                  })
+    };
+    handleDateChange = date => {
+      this.setState({
+        selectedDate: date
+      });
     };
 
 
-    addImageLink = record => {
-        return Object.assign({}, record, {
-            image: <a style={{cursor: "pointer"}} onClick={_ => this.addImage(record)}>View Image</a>
-        })
-    };
+    // addImageLink = record => {
+    //     return Object.assign({}, record, {
+    //         image: <a style={{cursor: "pointer"}} onClick={_ => this.addImage(record)}>View Image</a>
+    //     })
+    // };
+    //
+    // isSameCode = (r, record) => r.studentcode === record.studentcode
+    //
+    // addImage = record => {
+    //     this.setState({loaded: false});
+    //     const MIME = "data:image/jpeg;base64,";
+    //     fetchBeneficiaryImage(`${advaya_attendance}/${record.imageuri}`).then(res => {
+    //         const image = <img src={MIME + res.data} style={{"height": "40px", "width": "40px"}}/>;
+    //         const newRecord = Object.assign({}, record, {"image": image})
+    //
+    //         this.setState(prevState => ({
+    //             reportData: prevState.reportData.map(r => this.isSameCode(r, record) ? newRecord : r),
+    //             loaded: true
+    //         }))
+    //     }).catch(err => {
+    //         this.setState({loaded: true})
+    //     })
+    // }
+    //
+    //
 
-    isSameCode = (r, record) => r.studentcode === record.studentcode
-
-    addImage = record => {
-        this.setState({loaded: false});
-        const MIME = "data:image/jpeg;base64,";
-        fetchBeneficiaryImage(`${advaya_attendance}/${record.imageuri}`).then(res => {
-            const image = <img src={MIME + res.data} style={{"height": "40px", "width": "40px"}}/>;
-            const newRecord = Object.assign({}, record, {"image": image})
-
-            this.setState(prevState => ({
-                reportData: prevState.reportData.map(r => this.isSameCode(r, record) ? newRecord : r),
-                loaded: true
-            }))
-        }).catch(err => {
-            this.setState({loaded: true})
-        })
-    }
-
-
-    onHandleChange = selectedOption => {
-        this.setState({loaded: false});
-        Option(selectedOption).fold(
-            _ => this.setState({selectedOption: '', reportData: [], loaded: true}),
-            _ => {
-                fetchTHRLog(selectedOption.value).then(res => {
-                    this.setState({
-                        selectedOption,
-                        reportData: res.data.map(this.addImageLink),
-                        loaded: true
-                    })
-                }).catch(err => {
-                    this.setState({loaded: true})
-                })
-
-            })
-
-    }
 
     render() {
         const {options} = this.state;
         let selectedOption = this.state.selectedOption;
-        const value = selectedOption && selectedOption.value;
+      //  const value = selectedOption && selectedOption.value;
         return (
             <section className="wrapper state-overview report">
               <Loader loaded={this.state.loaded} top="50%" left="55%">
@@ -113,8 +114,8 @@ class AMR extends Component {
                     <label> Anganwadi </label>
                     <div className="anganwadi-drop-down">
                       <Select
-                        value={value}
-                        onChange={this.onHandleChange}
+                        value={selectedOption}
+                        onChange={this.handleAnganwadiCodeChange}
                         options={options}
                       />
                     </div>
@@ -124,7 +125,7 @@ class AMR extends Component {
                     <span className="date-title"> Date:</span>
                     <DatePicker
                       selected={this.state.selectedDate}
-                      onChange={this.handleChange}
+                      onChange={this.handleDateChange}
                       dateFormat="DD-MM-YYYY"
                     />
                   </div>
