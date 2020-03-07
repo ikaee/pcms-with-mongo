@@ -5,7 +5,7 @@ export default class NavMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            linkKey: 1,
+            linkKey: 5,
         }
     }
 
@@ -18,15 +18,15 @@ export default class NavMenu extends Component {
               <div id="sidebar" className="nav-collapse">
                 <ul className="sidebar-menu" id="nav-accordion">
                   <li>
-                    <Link className={this.activeClass(1)} onClick={() => this.activeKey(1)} to={"/"}>
+                    <Link className={this.activeClass(5)} onClick={() => this.activeKey(5)} to={"/"}>
                       <i className="fa fa-line-chart"></i>
-                      <span>Attendance</span>
+                      <span>Growth Monitoring</span>
                     </Link>
                   </li>
                   <li>
-                    <Link className={this.activeClass(5)} onClick={() => this.activeKey(5)} to={"/gm"}>
+                    <Link className={this.activeClass(1)} onClick={() => this.activeKey(1)} to={"/am"}>
                       <i className="fa fa-line-chart"></i>
-                      <span>Growth Monitoring</span>
+                      <span>Attendance</span>
                     </Link>
                   </li>
 

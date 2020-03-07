@@ -111,13 +111,13 @@ class AttendanceDashboard extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-lg-12 col-md-12 col-sm-12" >
+                  <div className="col-lg-8 col-md-12 col-sm-12" >
                     <div className="bar-chart-wrapper">
                       <MetricsDashboard data={metrics_data}/>
                       <MonthWise title='Month Wise Attendance Status' statedata={month_data}/>
                     </div>
                   </div>
-                  {/* <div className="col-lg-4  col-md-6 col-sm-12" >
+                  <div className="col-lg-4  col-md-6 col-sm-12" >
                     <div className="graph-chart-wrapper">
                       <GenderWise title='Gender Wise Attedance Status' data={gender_data}/>
                     </div>
@@ -126,7 +126,7 @@ class AttendanceDashboard extends Component {
                     <div className="graph-chart-wrapper">
                       <AgeWise title="Age Wise Attendance Status" data={age_data}/>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </Loader>
             </section>

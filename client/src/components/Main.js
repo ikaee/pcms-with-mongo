@@ -41,8 +41,8 @@ class Main extends React.Component {
           <Header title={"PCMS"} onClickHandler = {this.onClickHandler}/>
           <NavMenu />
           <section id={"main-content"} style1={{marginLeft: 0}}>
-            <Route exact path="/" component={AttendanceDashboard}/>
-            <Route path="/gm" component={GrowthMonitoringDashboard}/>
+            <Route path="/am" component={AttendanceDashboard}/>
+            <Route exact path="/" component={GrowthMonitoringDashboard}/>
             <Route path="/hm" component={MealDashBorad}/>
             <Route path="/th" component={THRDashBorad}/>
             <Route path="/thr" component={THR} />
