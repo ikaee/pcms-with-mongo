@@ -129,7 +129,6 @@ class GMR extends Component {
                   </div>
                 </div>
                 <ReactTable
-
                   data={this.state.reportData}
                   columns={GMRTableColumns}
                   filterable

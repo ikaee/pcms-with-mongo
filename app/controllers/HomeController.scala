@@ -13,7 +13,7 @@ import scala.concurrent.{Await, Future}
 class HomeController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
 
   def index() = Action { implicit request: Request[AnyContent] =>
-    Ok("Lay Bhaari")
+    Ok(views.html.index())
   }
 
 }
