@@ -5,7 +5,7 @@
   "proxy": "http://localhost:9000",
   "dependencies": {
     "aphrodite": "^1.2.5",
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "bootstrap": "^3.3.7",
     "chai": "^4.1.2",
     "chart.js": "^1.1.1",
